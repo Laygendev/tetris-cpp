@@ -1,0 +1,180 @@
+stdClass Object
+(
+    [label] => Mon super produit
+    [description] => 
+    [type] => 0
+    [price] => 0.00000000
+    [price_ttc] => 0.00000000
+    [price_min] => 0.00000000
+    [price_min_ttc] => 0.00000000
+    [price_base_type] => 
+    [multiprices] => Array
+        (
+        )
+
+    [multiprices_ttc] => Array
+        (
+        )
+
+    [multiprices_base_type] => Array
+        (
+        )
+
+    [multiprices_min] => Array
+        (
+        )
+
+    [multiprices_min_ttc] => Array
+        (
+        )
+
+    [multiprices_tva_tx] => Array
+        (
+        )
+
+    [multiprices_recuperableonly] => Array
+        (
+        )
+
+    [prices_by_qty] => Array
+        (
+        )
+
+    [prices_by_qty_list] => Array
+        (
+        )
+
+    [default_vat_code] => 
+    [tva_tx] => 0.000
+    [tva_npr] => 0
+    [localtax1_tx] => 0.000
+    [localtax2_tx] => 0.000
+    [localtax1_type] => 0
+    [localtax2_type] => 0
+    [stock_reel] => 
+    [stock_theorique] => 
+    [cost_price] => 
+    [pmp] => 0.00000000
+    [seuil_stock_alerte] => 
+    [desiredstock] => 
+    [duration_value] => 
+    [duration_unit] => 
+    [status] => 0
+    [status_buy] => 0
+    [finished] => 
+    [status_batch] => 0
+    [customcode] => 
+    [url] => 
+    [weight] => 
+    [weight_units] => 0
+    [length] => 
+    [length_units] => 0
+    [surface] => 
+    [surface_units] => 0
+    [volume] => 
+    [volume_units] => 0
+    [accountancy_code_buy] => 
+    [accountancy_code_buy_intra] => 
+    [accountancy_code_buy_export] => 
+    [accountancy_code_sell] => 
+    [barcode] => 
+    [barcodes_extra] => Array
+        (
+        )
+
+    [stats_propale] => Array
+        (
+        )
+
+    [stats_commande] => Array
+        (
+        )
+
+    [stats_contrat] => Array
+        (
+        )
+
+    [stats_facture] => Array
+        (
+        )
+
+    [stats_commande_fournisseur] => Array
+        (
+        )
+
+    [multilangs] => Array
+        (
+        )
+
+    [imgWidth] => 
+    [imgHeight] => 
+    [date_creation] => 2018-06-25 07:46:01
+    [date_modification] => 
+    [product_fourn_id] => 
+    [nbphoto] => 0
+    [stock_warehouse] => Array
+        (
+        )
+
+    [fk_price_expression] => 
+    [buyprice] => 
+    [fourn_pu] => 
+    [fourn_price_base_type] => 
+    [ref_fourn] => 
+    [ref_supplier] => 
+    [fk_unit] => 
+    [price_autogen] => 0
+    [id] => 2
+    [import_key] => 
+    [array_options] => Array
+        (
+        )
+
+    [linkedObjectsIds] => 
+    [canvas] => 
+    [fk_project] => 
+    [contact] => 
+    [contact_id] => 
+    [thirdparty] => 
+    [user] => 
+    [origin] => 
+    [origin_id] => 
+    [ref] => 01
+    [ref_ext] => 
+    [statut] => 
+    [country] => 
+    [country_id] => 
+    [country_code] => 
+    [barcode_type] => 6
+    [barcode_type_code] => 
+    [barcode_type_label] => 
+    [barcode_type_coder] => 
+    [mode_reglement_id] => 
+    [cond_reglement_id] => 
+    [cond_reglement] => 
+    [fk_delivery_address] => 
+    [shipping_method_id] => 
+    [modelpdf] => 
+    [fk_account] => 
+    [note_public] => 
+    [note_private] => 
+    [note] => 
+    [total_ht] => 
+    [total_tva] => 
+    [total_localtax1] => 
+    [total_localtax2] => 
+    [total_ttc] => 
+    [lines] => 
+    [fk_incoterms] => 
+    [libelle_incoterms] => 
+    [location_incoterms] => 
+    [recuperableonly] => 0
+    [duration] => 
+    [width] => 
+    [width_units] => 
+    [height] => 
+    [height_units] => 
+    [accountancy_code_sell_intra] => 
+    [accountancy_code_sell_export] => 
+    [entity] => 1
+)
