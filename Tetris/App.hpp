@@ -9,6 +9,7 @@
 #include "Loader.hpp"
 #include "Background.hpp"
 #include "Grid.hpp"
+#include "BlocMovable.hpp"
 #include "bloc.hpp"
 
 class App final
@@ -28,7 +29,7 @@ private:
 	Loader m_loader;
 	Background m_background;
 	Grid m_grid;
-	Bloc m_bloc;
+	BlocMovable m_bloc;
 	sf::Clock m_clock;
 
 	void draw();

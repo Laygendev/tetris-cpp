@@ -17,7 +17,7 @@ class Bloc
 		void SetTexture(sf::Texture *texture);
 		sf::Sprite &GetSprite();
 
-	private:
+	protected:
 		Grid* m_grid;
 
 		sf::Sprite sprite;

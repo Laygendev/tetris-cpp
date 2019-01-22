@@ -126,6 +126,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="bloc.cpp" />
+    <ClCompile Include="BlocMovable.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="loader.cpp" />
     <ClCompile Include="main.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Background.hpp" />
     <ClInclude Include="bloc.hpp" />
+    <ClInclude Include="BlocMovable.hpp" />
     <ClInclude Include="Grid.hpp" />
     <ClInclude Include="loader.hpp" />
   </ItemGroup>

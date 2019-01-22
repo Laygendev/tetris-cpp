@@ -17,16 +17,6 @@ void Bloc::Display(sf::RenderWindow &window)
 
 void Bloc::Update(sf::Clock &clock)
 {
-	sf::Time elapsed = clock.getElapsedTime();
-	std::cout << elapsed.asSeconds() << std::endl;
-	
-	if (elapsed.asSeconds() > 1) {
-		clock.restart();
-
-		m_cell.y += 1;
-		
-		sprite.setPosition(m_grid->GetPositionByCell(m_cell.x, m_cell.y));
-	}
 }
 
 void Bloc::SetTexture(sf::Texture *texture) {

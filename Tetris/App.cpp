@@ -5,11 +5,10 @@ App::App()
 	m_loader         (),
 	m_background     (m_loader.GetBackground()),
 	m_grid           (),
-	m_bloc           (&m_grid, m_loader.GetBlocTexture(0)),
+	m_bloc           (&m_grid, m_loader.GetBlocTexture(0), m_loader.GetBody(0)),
 	m_clock          ()
 {
 	m_bloc.GetSprite().setPosition(m_grid.GetPositionByCell(0, 0));
-	m_grid.AddBloc(m_bloc);
 }
 
 void App::run()
@@ -25,7 +24,7 @@ void App::run()
 				m_renderWindow.close();
 		}
 
-		m_grid.Update(m_clock);
+		m_bloc.Update(m_clock);
 		draw();
 	}
 }
@@ -50,5 +49,6 @@ void App::draw()
 	m_renderWindow.clear(sf::Color::Black);
 	m_background.draw(m_renderWindow);
 	m_grid.Draw(m_renderWindow);
+	m_bloc.Display(m_renderWindow);
 	m_renderWindow.display();
 }
