@@ -1,23 +1,26 @@
 #pragma once
 
-#ifndef DEF_BLOC
-#define DEF_BLOC
-
 #include <iostream>
 #include <SFML/Graphics.hpp>
+
+class Grid;
 
 class Bloc
 {
 	public:
 		
-		Bloc();
+		Bloc(Grid* grid, sf::Texture *texture);
 
 		void Display(sf::RenderWindow &window);
+		void Update(sf::Clock &clock);
+
 		void SetTexture(sf::Texture *texture);
-		sf::Sprite GetSprite();
+		sf::Sprite &GetSprite();
 
 	private:
-		sf::Sprite sprite;
-};
+		Grid* m_grid;
 
-#endif
+		sf::Sprite sprite;
+
+		sf::Vector2i m_cell;
+};

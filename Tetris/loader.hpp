@@ -12,9 +12,11 @@ class Loader
 		Loader();
 
 		sf::Texture* GetBackground();
+		sf::Texture* GetBlocTexture(int index);
 
 	private:
 		sf::Texture background;
+		sf::Texture m_blocsTexture[5];
 };
 
 #endif
