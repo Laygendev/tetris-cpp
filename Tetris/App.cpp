@@ -7,7 +7,7 @@ App::App()
 	m_grid           (),
 	m_clock          ()
 {
-	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(0), m_loader.GetBody(0)),
+	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(2), m_loader.GetBody(2)),
 	m_bloc->GetSprite().setPosition(m_grid.GetPositionByCell(0, 0));
 }
 
@@ -22,6 +22,18 @@ void App::run()
 		{
 			if (event.type == sf::Event::Closed)
 				m_renderWindow.close();
+
+			if (m_bloc != NULL && event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::Left)
+				{
+					m_bloc->translate("left");
+				}
+				else if (event.key.code == sf::Keyboard::Right)
+				{
+					m_bloc->translate("right");
+				}
+			}
 		}
 
 		if (m_bloc != NULL)
@@ -68,7 +80,8 @@ void App::draw()
 
 void App::nextBloc()
 {
+	int random_bloc = rand() % 3;
 	delete m_bloc;
-	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(0), m_loader.GetBody(0)),
+	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(random_bloc), m_loader.GetBody(random_bloc)),
 	m_bloc->GetSprite().setPosition(m_grid.GetPositionByCell(0, 0));
 }

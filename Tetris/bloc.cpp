@@ -13,12 +13,22 @@ Bloc::Bloc(Grid* grid, sf::Texture *texture, sf::Vector2i *body)
 	{
 		m_body[i].x = body[i].x;
 		m_body[i].y = body[i].y;
+		std::cout << m_body[i].x << std::endl;
+
+		m_shape[i].setSize(sf::Vector2f(44.f, 44.f));
+		m_shape[i].setFillColor(sf::Color(0, 0, 0, 50));
 	}
 }
 
 void Bloc::Display(sf::RenderWindow &window)
 {
 	window.draw(sprite);
+
+	for (int i = 0; i < 4; ++i)
+	{
+		window.draw(m_shape[i]);
+	}
+
 }
 
 void Bloc::Update(sf::Clock &clock)

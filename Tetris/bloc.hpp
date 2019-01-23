@@ -26,4 +26,5 @@ class Bloc
 		sf::Vector2i m_cell;
 
 		sf::Vector2i m_body[4];
+		sf::RectangleShape m_shape[4];
 };

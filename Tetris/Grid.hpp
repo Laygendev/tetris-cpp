@@ -24,6 +24,10 @@ public:
 
 	void AddBloc(Bloc& bloc);
 	bool CheckCollision(sf::Vector2i bodyCell);
+	bool CheckCollisionLeft(sf::Vector2i bodyCell);
+	bool CheckCollisionRight(sf::Vector2i bodyCell);
+
+	int numberbloc = 0;
 private:
 	int m_grid2D[8][18] = { 0 };
 	std::list<Bloc> m_blocs;

@@ -12,9 +12,13 @@ public:
 
 	BlocMovable(Grid* grid, sf::Texture *texture, sf::Vector2i *body);
 	~BlocMovable();
+
+	void translate(std::string direction);
 	void Update(sf::Clock &clock);
 
-	void CheckCollider();
+	bool CheckCollider();
+	bool CheckColliderLeft(sf::Vector2i cell);
+	bool CheckColliderRight(sf::Vector2i cell);
 	bool GetHasCollision();
 
 private:
