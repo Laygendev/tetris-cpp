@@ -23,6 +23,7 @@ public:
 	void Draw(sf::RenderWindow& window);
 
 	void AddBloc(Bloc& bloc);
+	bool CheckCollision(sf::Vector2i bodyCell);
 private:
 	int m_grid2D[8][18] = { 0 };
 	std::list<Bloc> m_blocs;

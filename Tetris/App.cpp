@@ -5,10 +5,10 @@ App::App()
 	m_loader         (),
 	m_background     (m_loader.GetBackground()),
 	m_grid           (),
-	m_bloc           (&m_grid, m_loader.GetBlocTexture(0), m_loader.GetBody(0)),
 	m_clock          ()
 {
-	m_bloc.GetSprite().setPosition(m_grid.GetPositionByCell(0, 0));
+	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(0), m_loader.GetBody(0)),
+	m_bloc->GetSprite().setPosition(m_grid.GetPositionByCell(0, 0));
 }
 
 void App::run()
@@ -24,7 +24,17 @@ void App::run()
 				m_renderWindow.close();
 		}
 
-		m_bloc.Update(m_clock);
+		if (m_bloc != NULL)
+		{
+			m_bloc->Update(m_clock);
+
+			if (m_bloc->GetHasCollision())
+			{
+				m_grid.AddBloc(*m_bloc);
+				nextBloc();
+			}
+		}
+
 		draw();
 	}
 }
@@ -49,6 +59,16 @@ void App::draw()
 	m_renderWindow.clear(sf::Color::Black);
 	m_background.draw(m_renderWindow);
 	m_grid.Draw(m_renderWindow);
-	m_bloc.Display(m_renderWindow);
+	if (m_bloc != NULL)
+	{
+		m_bloc->Display(m_renderWindow);
+	}
 	m_renderWindow.display();
+}
+
+void App::nextBloc()
+{
+	delete m_bloc;
+	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(0), m_loader.GetBody(0)),
+	m_bloc->GetSprite().setPosition(m_grid.GetPositionByCell(0, 0));
 }

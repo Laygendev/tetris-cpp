@@ -31,5 +31,5 @@ sf::Texture* Loader::GetBlocTexture(int index)
 
 sf::Vector2i* Loader::GetBody(int index)
 {
-	return &m_body[index];
+	return m_body[index];
 }

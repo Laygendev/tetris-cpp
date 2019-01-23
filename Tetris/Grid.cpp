@@ -24,6 +24,25 @@ void Grid::AddBloc(Bloc& bloc)
 	m_blocs.push_back(bloc);
 }
 
+bool Grid::CheckCollision(sf::Vector2i bodyCell)
+{
+	std::list<Bloc>::iterator it;
+
+	for (it = m_blocs.begin(); it != m_blocs.end(); ++it)
+	{
+		sf::Vector2i *body = it->getBodies();
+
+		for (int i = 0; i < 4; ++i)
+		{
+			if (bodyCell.y - body[i].y == 1) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 void Grid::Update(sf::Clock& clock) {
 	std::list<Bloc>::iterator it;
 

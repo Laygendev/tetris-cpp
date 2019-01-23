@@ -29,10 +29,11 @@ private:
 	Loader m_loader;
 	Background m_background;
 	Grid m_grid;
-	BlocMovable m_bloc;
+	BlocMovable *m_bloc;
 	sf::Clock m_clock;
 
 	void draw();
+	void nextBloc();
 };
 
 #endif
