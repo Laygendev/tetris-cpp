@@ -7,7 +7,7 @@ App::App()
 	m_grid           (),
 	m_clock          ()
 {
-	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(2), m_loader.GetBody(2)),
+	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(0), m_loader.GetCell(0)),
 	m_bloc->GetSprite().setPosition(m_grid.GetPositionByCell(0, 0));
 }
 
@@ -42,7 +42,7 @@ void App::run()
 
 			if (m_bloc->GetHasCollision())
 			{
-				m_grid.AddBloc(*m_bloc);
+				m_grid.AddBloc(m_bloc);
 				nextBloc();
 			}
 		}
@@ -80,8 +80,8 @@ void App::draw()
 
 void App::nextBloc()
 {
-	int random_bloc = rand() % 3;
+	int random_bloc = rand() % 1;
 	delete m_bloc;
-	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(random_bloc), m_loader.GetBody(random_bloc)),
+	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(random_bloc), m_loader.GetCell(random_bloc)),
 	m_bloc->GetSprite().setPosition(m_grid.GetPositionByCell(0, 0));
 }

@@ -6,6 +6,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+#include "Cell.hpp"
+
 class Loader
 {
 	public:
@@ -13,12 +15,12 @@ class Loader
 
 		sf::Texture* GetBackground();
 		sf::Texture* GetBlocTexture(int index);
-		sf::Vector2i* GetBody(int index);
+		Cell* GetCell(int index);
 
 	private:
 		sf::Texture background;
 		sf::Texture m_blocsTexture[5];
-		sf::Vector2i m_body[5][4];
+		Cell m_cell[5][4];
 };
 
 #endif

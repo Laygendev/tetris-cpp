@@ -1,7 +1,7 @@
 #include "BlocMovable.hpp"
 #include "Grid.hpp"
 
-BlocMovable::BlocMovable(Grid* grid, sf::Texture *texture, sf::Vector2i *body) : Bloc(grid, texture, body)
+BlocMovable::BlocMovable(Grid* grid, sf::Texture *texture, Cell *cells) : Bloc(grid, texture, cells)
 {
 
 }
@@ -18,22 +18,22 @@ void BlocMovable::translate(std::string direction)
 
 		for (int i = 0; i < 4; ++i)
 		{
-			if (m_body[i].x - 1 < 0) {
+			if (m_cells[i]->getPos().x - 1 < 0) {
 				canGoLeft = false;
 				break;
 			}
 
-			if (CheckColliderLeft(m_body[i])) {
+			if (CheckColliderLeft(m_cells[i]->getPos())) {
 				canGoLeft = false;
 				break;
 			}
 		}
 
 		if (canGoLeft) {
-			m_cell.x -= 1;
+			m_cell_pos.x -= 1;
 			for (int i = 0; i < 4; ++i)
 			{
-				m_body[i].x -= 1;
+				m_cells[i]->increasePos(-1, 0);
 			}
 		}
 	}
@@ -42,21 +42,21 @@ void BlocMovable::translate(std::string direction)
 
 		for (int i = 0; i < 4; ++i)
 		{
-			if (m_body[i].x + 1 > 8) {
+			if (m_cells[i]->getPos().x + 1 > 8) {
 				canGoRight = false;
 				break;
 			}
 
-			if (CheckColliderRight(m_body[i])) {
+			if (CheckColliderRight(m_cells[i]->getPos())) {
 				canGoRight = false;
 				break;
 			}
 		}
 		if (canGoRight) {
-			m_cell.x += 1;
+			m_cell_pos.x += 1;
 			for (int i = 0; i < 4; ++i)
 			{
-				m_body[i].x += 1;
+				m_cells[i]->increasePos(1, 0);
 			}
 		}
 	}
@@ -73,20 +73,20 @@ void BlocMovable::Update(sf::Clock &clock)
 
 		}
 		else {
-			m_cell.y += 1;
+			m_cell_pos.y += 1;
 
 			for (int i = 0; i < 4; ++i)
 			{
-				m_body[i].y += 1;
+				m_cells[i]->increasePos(0, 1);
 			}
 		}
 	}
 
-	sprite.setPosition(m_grid->GetPositionByCell(m_cell.x, m_cell.y));
+	sprite.setPosition(m_grid->GetPositionByCell(m_cell_pos.x, m_cell_pos.y));
 
 	for (int i = 0; i < 4; ++i)
 	{
-		m_shape[i].setPosition(m_grid->GetPositionByCell(m_body[i].x, m_body[i].y));
+		m_cells[i]->update(*m_grid);
 	}
 
 }
@@ -95,12 +95,12 @@ bool BlocMovable::CheckCollider()
 {
 	for (int i = 0; i < 4; ++i)
 	{
-		if (m_grid->CheckCollision(m_body[i])) {
+		if (m_grid->CheckCollision(m_cells[i]->getPos())) {
 			m_hasCollision = true;
 			return true;
 		}
 
-		if ((m_body[i].y + 1) > 18) {
+		if ((m_cells[i]->getPos().y + 1) > 18) {
 			m_hasCollision = true;
 			return true;
 		}

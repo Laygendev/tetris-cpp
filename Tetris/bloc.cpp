@@ -1,22 +1,17 @@
 #include "Bloc.hpp"
 #include "Grid.hpp"
 
-Bloc::Bloc(Grid* grid, sf::Texture *texture, sf::Vector2i *body)
+Bloc::Bloc(Grid* grid, sf::Texture *texture, Cell *cells)
 {
 	m_grid = grid;
 	sprite.setTexture(*texture);
 
-	m_cell.x = 0;
-	m_cell.y = 0;
+	m_cell_pos.x = 0;
+	m_cell_pos.y = 0;
 
 	for (int i = 0; i < 4; ++i)
 	{
-		m_body[i].x = body[i].x;
-		m_body[i].y = body[i].y;
-		std::cout << m_body[i].x << std::endl;
-
-		m_shape[i].setSize(sf::Vector2f(44.f, 44.f));
-		m_shape[i].setFillColor(sf::Color(0, 0, 0, 50));
+		m_cells[i] = new Cell(this, cells[i].getPos(), cells[i].getColor());
 	}
 }
 
@@ -26,7 +21,7 @@ void Bloc::Display(sf::RenderWindow &window)
 
 	for (int i = 0; i < 4; ++i)
 	{
-		window.draw(m_shape[i]);
+		m_cells[i]->draw(window);
 	}
 
 }
@@ -43,6 +38,6 @@ sf::Sprite &Bloc::GetSprite() {
 	return sprite;
 }
 
-sf::Vector2i *Bloc::getBodies() {
-	return m_body;
+Cell *Bloc::getCells() {
+	return *m_cells;
 }

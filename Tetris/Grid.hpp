@@ -10,6 +10,7 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "bloc.hpp"
+#include "Cell.hpp"
 
 class Grid
 {
@@ -22,15 +23,18 @@ public:
 	void Update(sf::Clock& clock);
 	void Draw(sf::RenderWindow& window);
 
-	void AddBloc(Bloc& bloc);
+	void AddBloc(Bloc bloc);
 	bool CheckCollision(sf::Vector2i bodyCell);
 	bool CheckCollisionLeft(sf::Vector2i bodyCell);
 	bool CheckCollisionRight(sf::Vector2i bodyCell);
-
-	int numberbloc = 0;
 private:
-	int m_grid2D[8][18] = { 0 };
-	std::list<Bloc> m_blocs;
+	void updateGrid(Bloc &bloc);
+	void checkLine(Bloc &bloc);
+	bool checkLineCellY(int cellY, std::string color);
+	void destroyLine(int cellY);
+
+	Cell m_grid2D[9][19];
+	std::list<Bloc*> m_blocs;
 
 	sf::Vector2f m_offset;
 };

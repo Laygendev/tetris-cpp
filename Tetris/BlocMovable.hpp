@@ -10,7 +10,7 @@ class BlocMovable : public Bloc
 {
 public:
 
-	BlocMovable(Grid* grid, sf::Texture *texture, sf::Vector2i *body);
+	BlocMovable(Grid* grid, sf::Texture *texture, Cell *cells);
 	~BlocMovable();
 
 	void translate(std::string direction);

@@ -3,28 +3,29 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+#include "Cell.hpp"
+
 class Grid;
 
 class Bloc
 {
 	public:
 		
-		Bloc(Grid* grid, sf::Texture *texture, sf::Vector2i *body);
+		Bloc(Grid* grid, sf::Texture *texture, Cell *cells);
 
 		void Display(sf::RenderWindow &window);
 		void Update(sf::Clock &clock);
 
 		void SetTexture(sf::Texture *texture);
 		sf::Sprite &GetSprite();
-		sf::Vector2i *getBodies();
+		Cell *getCells();
 
 	protected:
 		Grid* m_grid;
 
 		sf::Sprite sprite;
 
-		sf::Vector2i m_cell;
+		sf::Vector2i m_cell_pos;
 
-		sf::Vector2i m_body[4];
-		sf::RectangleShape m_shape[4];
+		Cell* m_cells[4];
 };
