@@ -13,7 +13,7 @@ class Cell
 {
 public:
 	Cell();
-	Cell(Bloc* bloc, sf::Vector2i pos, std::string color);
+	Cell(Bloc *bloc, sf::Vector2i pos, std::string color);
 
 	void update(Grid &grid);
 	void draw(sf::RenderWindow &window);
@@ -24,7 +24,7 @@ public:
 
 	void destroy();
 
-	sf::Vector2i getPos();
+	sf::Vector2i *getPos();
 	std::string getColor();
 private:
 	Bloc *m_bloc;

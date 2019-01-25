@@ -4,9 +4,10 @@
 
 Cell::Cell() {}
 
-Cell::Cell(Bloc* bloc, sf::Vector2i pos, std::string color)
+Cell::Cell(Bloc *bloc, sf::Vector2i pos, std::string color)
 {
 	m_bloc = bloc;
+
 	m_pos = pos;
 	m_color = color;
 	m_shape.setSize(sf::Vector2f(44.f, 44.f));
@@ -18,6 +19,7 @@ Cell::Cell(Bloc* bloc, sf::Vector2i pos, std::string color)
 		m_shape.setFillColor(sf::Color(0, 0, 0, 50));
 	}
 }
+
 
 void Cell::update(Grid &grid) {
 	m_shape.setPosition(grid.GetPositionByCell(m_pos.x, m_pos.y));
@@ -41,12 +43,12 @@ void Cell::increasePos(int x, int y)
 
 void Cell::destroy()
 {
-
+	m_bloc->deleteCell(this);
 }
 
-sf::Vector2i Cell::getPos()
+sf::Vector2i* Cell::getPos()
 {
-	return m_pos;
+	return &m_pos;
 }
 
 std::string Cell::getColor()

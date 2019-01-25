@@ -6,6 +6,11 @@ Grid::Grid()
 	m_offset.y = 96.f;
 }
 
+Grid::~Grid()
+{
+	std::cout << "Destructor Grid" << std::endl;
+}
+
 sf::Vector2f Grid::GetPositionByCell(int cellX, int cellY)
 {
 	sf::Vector2f position;
@@ -19,12 +24,19 @@ sf::Vector2f Grid::GetPositionByCell(int cellX, int cellY)
 	return position;
 }
 
-void Grid::AddBloc(Bloc bloc)
+void Grid::AddBloc(Grid* grid, Bloc *bloc)
 {
-	Bloc* newBloc = new Bloc(this, bloc.GetSprite().getTexture(), bloc.getCells());
+	Cell *tmp = bloc->getCells();
+
+	/*Bloc newBloc = *bloc;
 	m_blocs.push_back(newBloc);
-	updateGrid(bloc);
-	checkLine(bloc);
+	for (int i = 0; i < 4; ++i)
+	{
+		std::cout << newBloc.getCells()[i].getPos().y << std::endl;
+	}
+	destroyLine(18);*/
+	//updateGrid(*newBloc);
+	//checkLine(*newBloc);
 }
 
 bool Grid::CheckCollision(sf::Vector2i bodyCell)
@@ -37,7 +49,7 @@ bool Grid::CheckCollision(sf::Vector2i bodyCell)
 
 		for (int i = 0; i < 4; ++i)
 		{
-			if (body[i].getPos().x == bodyCell.x && body[i].getPos().y - bodyCell.y == 1) {
+			if (body[i].getPos()->x == bodyCell.x && body[i].getPos()->y - bodyCell.y == 1) {
 				return true;
 			}
 		}
@@ -56,7 +68,7 @@ bool Grid::CheckCollisionLeft(sf::Vector2i bodyCell)
 
 		for (int i = 0; i < 4; ++i)
 		{
-			if (body[i].getPos().x - bodyCell.x == -1 && body[i].getPos().y == bodyCell.y ) {
+			if (body[i].getPos()->x - bodyCell.x == -1 && body[i].getPos()->y == bodyCell.y ) {
 				return true;
 			}
 		}
@@ -75,7 +87,7 @@ bool Grid::CheckCollisionRight(sf::Vector2i bodyCell)
 
 		for (int i = 0; i < 4; ++i)
 		{
-			if (body[i].getPos().x - bodyCell.x == 1 && body[i].getPos().y == bodyCell.y) {
+			if (body[i].getPos()->x - bodyCell.x == 1 && body[i].getPos()->y == bodyCell.y) {
 				return true;
 			}
 		}
@@ -109,8 +121,8 @@ void Grid::updateGrid(Bloc &bloc)
 	
 	for (int i = 0; i < 4; ++i)
 	{
-		sf::Vector2i pos = cells[i].getPos();
-		m_grid2D[pos.x][pos.y] = cells[i];
+		//sf::Vector2i pos = cells[i]->getPos();
+		//m_grid2D[pos.x][pos.y] = cells[i];
 	}
 }
 
@@ -120,13 +132,13 @@ void Grid::checkLine(Bloc &bloc)
 
 	for (int i = 3; i < 4; ++i)
 	{
-		sf::Vector2i pos = cells[i].getPos();
+		//sf::Vector2i pos = cells[i].getPos();
 		sf::String color = cells[i].getColor();
 
-		if (checkLineCellY(pos.y, color))
-		{
-			destroyLine(pos.y);
-		}
+		//if (checkLineCellY(pos.y, color))
+	//	{
+	//		destroyLine(pos.y);
+	//	}
 	}
 }
 
@@ -146,9 +158,10 @@ bool Grid::checkLineCellY(int cellY, std::string color)
 
 void Grid::destroyLine(int cellY)
 {
-	for (int i = 0; i < 9; i++) {
-		Cell cell = m_grid2D[i][cellY];
+	Cell cell = m_grid2D[0][cellY];
 
-		cell.destroy();
-	}
+	cell.destroy();
+	/*for (int i = 0; i < 9; i++) {
+		
+	}*/
 }

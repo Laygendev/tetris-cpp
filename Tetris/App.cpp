@@ -7,8 +7,7 @@ App::App()
 	m_grid           (),
 	m_clock          ()
 {
-	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(0), m_loader.GetCell(0)),
-	m_bloc->GetSprite().setPosition(m_grid.GetPositionByCell(0, 0));
+	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(0), m_loader.GetCell(0));
 }
 
 void App::run()
@@ -38,12 +37,23 @@ void App::run()
 
 		if (m_bloc != NULL)
 		{
+			
 			m_bloc->Update(m_clock);
 
 			if (m_bloc->GetHasCollision())
 			{
-				m_grid.AddBloc(m_bloc);
-				nextBloc();
+				Cell* tmpCell = m_bloc->getCells();
+				for (int i = 0; i < 4; ++i)
+				{
+					sf::Vector2i *tmp = tmpCell[i].getPos();
+					std::cout << tmp->y << std::endl;
+				}
+				
+
+				//m_grid.AddBloc(&m_grid, m_bloc);
+				//delete m_bloc;
+				//m_bloc = 0;
+				//nextBloc();
 			}
 		}
 
@@ -81,7 +91,5 @@ void App::draw()
 void App::nextBloc()
 {
 	int random_bloc = rand() % 1;
-	delete m_bloc;
-	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(random_bloc), m_loader.GetCell(random_bloc)),
-	m_bloc->GetSprite().setPosition(m_grid.GetPositionByCell(0, 0));
+	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(random_bloc), m_loader.GetCell(random_bloc));
 }

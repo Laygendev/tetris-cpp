@@ -12,18 +12,21 @@ class Bloc
 	public:
 		
 		Bloc(Grid* grid, sf::Texture *texture, Cell *cells);
+		Bloc(Bloc const& blocToCopy);
+		~Bloc();
 
 		void Display(sf::RenderWindow &window);
 		void Update(sf::Clock &clock);
+		void deleteCell(Cell *cell);
 
 		void SetTexture(sf::Texture *texture);
-		sf::Sprite &GetSprite();
 		Cell *getCells();
+		sf::Texture *getTexture();
 
 	protected:
 		Grid* m_grid;
 
-		sf::Sprite sprite;
+		sf::Texture *m_texture;
 
 		sf::Vector2i m_cell_pos;
 

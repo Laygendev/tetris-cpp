@@ -11,6 +11,7 @@
 #include "Grid.hpp"
 #include "BlocMovable.hpp"
 #include "bloc.hpp"
+#include "Cell.hpp"
 
 class App final
 {

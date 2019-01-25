@@ -3,11 +3,11 @@
 Loader::Loader()
 {
 	background.loadFromFile("ressources/Mockup/background.jpg");
-	m_blocsTexture[0].loadFromFile("ressources/I/1.png");
-	m_blocsTexture[1].loadFromFile("ressources/L/L.png");
-	m_blocsTexture[2].loadFromFile("ressources/R/R.png");
-	m_blocsTexture[3].loadFromFile("ressources/S/S.png");
-	m_blocsTexture[4].loadFromFile("ressources/T/T_2.png");
+	m_blocsTexture[0].loadFromFile("ressources/green.png");
+	m_blocsTexture[1].loadFromFile("ressources/marron.png");
+	m_blocsTexture[2].loadFromFile("ressources/orange.png");
+	m_blocsTexture[3].loadFromFile("ressources/white.png");
+	m_blocsTexture[4].loadFromFile("ressources/yellow.png");
 
 	m_cell[0][0] = Cell(NULL, sf::Vector2i(0, 0), "yellow");
 	m_cell[0][1] = Cell(NULL, sf::Vector2i(0, 1), "yellow");
