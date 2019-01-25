@@ -49,7 +49,7 @@ bool Grid::CheckCollision(sf::Vector2i bodyCell)
 
 		for (int i = 0; i < 4; ++i)
 		{
-			if (body[i].getPos()->x == bodyCell.x && body[i].getPos()->y - bodyCell.y == 1) {
+			if (body[i].getPos().x == bodyCell.x && body[i].getPos().y - bodyCell.y == 1) {
 				return true;
 			}
 		}
@@ -68,7 +68,7 @@ bool Grid::CheckCollisionLeft(sf::Vector2i bodyCell)
 
 		for (int i = 0; i < 4; ++i)
 		{
-			if (body[i].getPos()->x - bodyCell.x == -1 && body[i].getPos()->y == bodyCell.y ) {
+			if (body[i].getPos().x - bodyCell.x == -1 && body[i].getPos().y == bodyCell.y ) {
 				return true;
 			}
 		}
@@ -87,7 +87,7 @@ bool Grid::CheckCollisionRight(sf::Vector2i bodyCell)
 
 		for (int i = 0; i < 4; ++i)
 		{
-			if (body[i].getPos()->x - bodyCell.x == 1 && body[i].getPos()->y == bodyCell.y) {
+			if (body[i].getPos().x - bodyCell.x == 1 && body[i].getPos().y == bodyCell.y) {
 				return true;
 			}
 		}

@@ -84,7 +84,7 @@ void BlocMovable::Update(sf::Clock &clock)
 
 	for (int i = 0; i < 4; ++i)
 	{
-		m_cells[i]->update(*m_grid);
+		//m_cells[i]->update(*m_grid);
 	}
 
 }
@@ -127,11 +127,5 @@ bool BlocMovable::CheckColliderRight(sf::Vector2i cell)
 
 bool BlocMovable::GetHasCollision()
 {
-	std::cout << "Start have collider" << std::endl;
-	for (int i = 0; i < 4; ++i)
-	{
-		std::cout << m_cells[i]->getPos().y << std::endl;
-	}
-	std::cout << "End have collider" << std::endl;
-	return m_hasCollision;
+	return false;
 }

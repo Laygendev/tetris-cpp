@@ -46,9 +46,9 @@ void Cell::destroy()
 	m_bloc->deleteCell(this);
 }
 
-sf::Vector2i* Cell::getPos()
+sf::Vector2i Cell::getPos()
 {
-	return &m_pos;
+	return m_pos;
 }
 
 std::string Cell::getColor()

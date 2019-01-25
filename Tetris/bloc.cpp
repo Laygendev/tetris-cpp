@@ -9,10 +9,15 @@ Bloc::Bloc(Grid* grid, sf::Texture *texture, Cell *cells)
 	m_cell_pos.x = 0;
 	m_cell_pos.y = 0;
 
-	for (int i = 0; i < 4; ++i)
+	m_cells[0] = new Cell(this, sf::Vector2i(0, 0), "yellow");
+	m_cells[1] = new Cell(this, sf::Vector2i(0, 1), "yellow");
+	m_cells[2] = new Cell(this, sf::Vector2i(0, 2), "yellow");
+	m_cells[3] = new Cell(this, sf::Vector2i(0, 3), "yellow");
+
+	/*for (int i = 0; i < 4; ++i)
 	{
-		m_cells[i] = new Cell(this, *cells[i].getPos(), cells[i].getColor());
-	}
+		m_cells[i] = new Cell(this, cells[i].getPos(), cells[i].getColor());
+	}*/
 
 	std::cout << "cell" << std::endl;
 }
@@ -48,8 +53,8 @@ void Bloc::SetTexture(sf::Texture *texture) {
 
 void Bloc::deleteCell(Cell *cell)
 {
-	delete cell;
-	cell = 0;
+	//delete cell;
+	// cell = 0;
 }
 
 sf::Texture *Bloc::getTexture()
@@ -57,6 +62,6 @@ sf::Texture *Bloc::getTexture()
 	return m_texture;
 }
 
-Cell *Bloc::getCells() {
-	return *m_cells;
+Cell Bloc::getCells() {
+	return m_cells;
 }

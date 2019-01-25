@@ -40,14 +40,16 @@ void App::run()
 			
 			m_bloc->Update(m_clock);
 
+			Cell* tmpCell = m_bloc->getCells();
+			for (int i = 0; i < 4; ++i)
+			{
+				sf::Vector2i tmp = tmpCell[i].getPos();
+				std::cout << tmp.y << std::endl;
+			}
+
 			if (m_bloc->GetHasCollision())
 			{
-				Cell* tmpCell = m_bloc->getCells();
-				for (int i = 0; i < 4; ++i)
-				{
-					sf::Vector2i *tmp = tmpCell[i].getPos();
-					std::cout << tmp->y << std::endl;
-				}
+				
 				
 
 				//m_grid.AddBloc(&m_grid, m_bloc);

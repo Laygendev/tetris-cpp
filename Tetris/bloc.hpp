@@ -20,7 +20,7 @@ class Bloc
 		void deleteCell(Cell *cell);
 
 		void SetTexture(sf::Texture *texture);
-		Cell *getCells();
+		Cell getCells();
 		sf::Texture *getTexture();
 
 	protected:

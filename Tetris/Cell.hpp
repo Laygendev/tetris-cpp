@@ -24,7 +24,7 @@ public:
 
 	void destroy();
 
-	sf::Vector2i *getPos();
+	sf::Vector2i getPos();
 	std::string getColor();
 private:
 	Bloc *m_bloc;
