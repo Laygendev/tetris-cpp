@@ -32,30 +32,31 @@ void App::run()
 				{
 					m_bloc->translate("right");
 				}
+				else if (event.key.code == sf::Keyboard::Down)
+				{
+					m_bloc->translate("down");
+				}
+				else if (event.key.code == sf::Keyboard::Up)
+				{
+					m_bloc->translate("up");
+				}
 			}
 		}
+
+		m_grid.Update(m_clock);
 
 		if (m_bloc != NULL)
 		{
 			
 			m_bloc->Update(m_clock);
 
-			Cell* tmpCell = m_bloc->getCells();
-			for (int i = 0; i < 4; ++i)
-			{
-				sf::Vector2i tmp = tmpCell[i].getPos();
-				std::cout << tmp.y << std::endl;
-			}
-
 			if (m_bloc->GetHasCollision())
 			{
+				m_grid.AddBloc(&m_grid, m_bloc);
+				delete m_bloc;
+				m_bloc = 0;
 				
-				
-
-				//m_grid.AddBloc(&m_grid, m_bloc);
-				//delete m_bloc;
-				//m_bloc = 0;
-				//nextBloc();
+				nextBloc();
 			}
 		}
 
@@ -92,6 +93,6 @@ void App::draw()
 
 void App::nextBloc()
 {
-	int random_bloc = rand() % 1;
-	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(random_bloc), m_loader.GetCell(random_bloc));
+	int random_bloc = rand() % 5;
+	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(random_bloc), m_loader.GetCell(random_bloc) );
 }

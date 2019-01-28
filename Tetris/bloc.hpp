@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 #include "Cell.hpp"
 
@@ -11,16 +12,19 @@ class Bloc
 {
 	public:
 		
-		Bloc(Grid* grid, sf::Texture *texture, Cell *cells);
+		Bloc(Grid* grid, sf::Texture *texture, std::vector<Cell*> cells);
 		Bloc(Bloc const& blocToCopy);
 		~Bloc();
 
 		void Display(sf::RenderWindow &window);
 		void Update(sf::Clock &clock);
-		void deleteCell(Cell *cell);
+		void updateTexture();
+		void updateCellPos();
+		int deleteCellInLine(int y);
 
-		void SetTexture(sf::Texture *texture);
-		Cell getCells();
+		
+		void setCells(std::vector<Cell*> cells);
+		std::vector<Cell*> getCells();
 		sf::Texture *getTexture();
 
 	protected:
@@ -30,5 +34,7 @@ class Bloc
 
 		sf::Vector2i m_cell_pos;
 
-		Cell* m_cells[4];
+		int m_currentAngle = 0;
+
+		std::vector<Cell*> m_cells;
 };

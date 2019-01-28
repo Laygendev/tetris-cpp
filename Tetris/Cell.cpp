@@ -4,51 +4,100 @@
 
 Cell::Cell() {}
 
-Cell::Cell(Bloc *bloc, sf::Vector2i pos, std::string color)
+Cell::Cell(Bloc *bloc, std::vector<sf::Vector2i> pos, std::string color)
 {
 	m_bloc = bloc;
-
 	m_pos = pos;
 	m_color = color;
-	m_shape.setSize(sf::Vector2f(44.f, 44.f));
+}
 
-	if ("yellow" == color) {
-		m_shape.setFillColor(sf::Color(0, 255, 255, 50));
-	}
-	else {
-		m_shape.setFillColor(sf::Color(0, 0, 0, 50));
-	}
+Cell::Cell(Cell const& cellToCopy)
+	: m_bloc(cellToCopy.m_bloc),
+	m_pos(cellToCopy.m_pos),
+	m_color(cellToCopy.m_color),
+	m_sprite(cellToCopy.m_sprite),
+	m_currentRotation(cellToCopy.m_currentRotation)
+{
+	std::cout << "Copy cell" << std::endl;
+}
+
+
+void Cell::init(Grid &grid) {
+	m_sprite.setPosition(grid.GetPositionByCell(m_pos[m_currentRotation].x, m_pos[m_currentRotation].y));
 }
 
 
 void Cell::update(Grid &grid) {
-	m_shape.setPosition(grid.GetPositionByCell(m_pos.x, m_pos.y));
+	m_sprite.setPosition(grid.GetPositionByCell(m_pos[m_currentRotation].x, m_pos[m_currentRotation].y));
 }
 
 void Cell::draw(sf::RenderWindow &window)
 {
-	window.draw(m_shape);
+	std::cout << m_pos[m_currentRotation].y << std::endl;
+	window.draw(m_sprite);
 }
 
 void Cell::setPos(sf::Vector2i pos)
 {
-	m_pos = pos;
+	m_pos[m_currentRotation] = pos;
 }
 
 void Cell::increasePos(int x, int y)
 {
-	m_pos.x += x;
-	m_pos.y += y;
+	for (int i = 0; i < m_pos.size(); ++i)
+	{
+		m_pos[i].x += x;
+		m_pos[i].y += y;
+	}
 }
+
+
+void Cell::SetTexture(sf::Texture *texture) {
+	m_texture = texture;
+	m_sprite.setTexture(*m_texture);
+}
+
 
 void Cell::destroy()
 {
-	m_bloc->deleteCell(this);
+	m_bloc->deleteCellInLine(m_pos[m_currentRotation].y);
+}
+
+sf::Vector2i Cell::simulateNextRotation()
+{
+	int nextRotation = m_currentRotation + 1;
+
+	if (m_pos.size() <= nextRotation)
+	{
+		nextRotation = 0;
+	}
+
+	return m_pos[nextRotation];
+}
+
+void Cell::nextRotation()
+{
+	m_currentRotation++;
+
+	if (m_pos.size() <= m_currentRotation)
+	{
+		m_currentRotation = 0;
+	}
+}
+
+void Cell::setBloc(Bloc *bloc)
+{
+	m_bloc = bloc;
+}
+
+Bloc Cell::getBloc()
+{
+	return *m_bloc;
 }
 
 sf::Vector2i Cell::getPos()
 {
-	return m_pos;
+	return m_pos[m_currentRotation];
 }
 
 std::string Cell::getColor()

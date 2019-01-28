@@ -26,30 +26,29 @@ sf::Vector2f Grid::GetPositionByCell(int cellX, int cellY)
 
 void Grid::AddBloc(Grid* grid, Bloc *bloc)
 {
-	Cell *tmp = bloc->getCells();
+	Bloc *newBloc = bloc;
+	std::vector<Cell*> body = newBloc->getCells();
+	updateGrid(bloc);
 
-	/*Bloc newBloc = *bloc;
-	m_blocs.push_back(newBloc);
-	for (int i = 0; i < 4; ++i)
+	int lineY = 0;
+	
+	while (lineY = searchLineWithFullCell())
 	{
-		std::cout << newBloc.getCells()[i].getPos().y << std::endl;
+		deleteCellInSameLine(lineY);
 	}
-	destroyLine(18);*/
-	//updateGrid(*newBloc);
-	//checkLine(*newBloc);
 }
 
 bool Grid::CheckCollision(sf::Vector2i bodyCell)
 {
-	std::list<Bloc>::iterator it;
+	std::vector<Bloc>::iterator it;
 
 	for (it = m_blocs.begin(); it != m_blocs.end(); ++it)
 	{
-		Cell *body = it->getCells();
+		std::vector<Cell*> body = it->getCells();
 
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < body.size(); ++i)
 		{
-			if (body[i].getPos().x == bodyCell.x && body[i].getPos().y - bodyCell.y == 1) {
+			if (body[i]->getPos().x == bodyCell.x && body[i]->getPos().y - bodyCell.y == 1) {
 				return true;
 			}
 		}
@@ -60,15 +59,15 @@ bool Grid::CheckCollision(sf::Vector2i bodyCell)
 
 bool Grid::CheckCollisionLeft(sf::Vector2i bodyCell)
 {
-	std::list<Bloc>::iterator it;
+	std::vector<Bloc>::iterator it;
 
 	for (it = m_blocs.begin(); it != m_blocs.end(); ++it)
 	{
-		Cell *body = it->getCells();
+		std::vector<Cell*> body = it->getCells();
 
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < body.size(); ++i)
 		{
-			if (body[i].getPos().x - bodyCell.x == -1 && body[i].getPos().y == bodyCell.y ) {
+			if (body[i]->getPos().x - bodyCell.x == -1 && body[i]->getPos().y == bodyCell.y ) {
 				return true;
 			}
 		}
@@ -79,15 +78,15 @@ bool Grid::CheckCollisionLeft(sf::Vector2i bodyCell)
 
 bool Grid::CheckCollisionRight(sf::Vector2i bodyCell)
 {
-	std::list<Bloc>::iterator it;
+	std::vector<Bloc>::iterator it;
 
 	for (it = m_blocs.begin(); it != m_blocs.end(); ++it)
 	{
-		Cell *body = it->getCells();
+		std::vector<Cell*> body = it->getCells();
 
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < body.size(); ++i)
 		{
-			if (body[i].getPos().x - bodyCell.x == 1 && body[i].getPos().y == bodyCell.y) {
+			if (body[i]->getPos().x - bodyCell.x == 1 && body[i]->getPos().y == bodyCell.y) {
 				return true;
 			}
 		}
@@ -97,7 +96,7 @@ bool Grid::CheckCollisionRight(sf::Vector2i bodyCell)
 }
 
 void Grid::Update(sf::Clock& clock) {
-	std::list<Bloc>::iterator it;
+	std::vector<Bloc>::iterator it;
 
 	for (it = m_blocs.begin(); it != m_blocs.end(); ++it)
 	{
@@ -107,61 +106,127 @@ void Grid::Update(sf::Clock& clock) {
 
 void Grid::Draw(sf::RenderWindow& window)
 {
-	std::list<Bloc>::iterator it;
+	for (int i = 0; i < 9; ++i)
+	{
+		for (int j = 0; j < 19; ++j)
+		{
+			if (m_grid[i][j] != NULL)
+			{
+				m_grid[i][j]->draw(window);
+			}
+		}
+	}
+
+	/*std::vector<Bloc>::iterator it;
 
 	for (it = m_blocs.begin(); it != m_blocs.end(); ++it)
 	{
 		it->Display(window);
-	}
+	}*/
 }
 
-void Grid::updateGrid(Bloc &bloc)
+void Grid::updateGrid(Bloc* bloc)
 {
-	Cell *cells = bloc.getCells();
+	std::vector<Cell*> body = bloc->getCells();
 	
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < body.size(); ++i)
 	{
-		//sf::Vector2i pos = cells[i]->getPos();
-		//m_grid2D[pos.x][pos.y] = cells[i];
+		sf::Vector2i pos = body[i]->getPos();
+		m_grid[pos.x][pos.y] = body[i];
 	}
 }
 
-void Grid::checkLine(Bloc &bloc)
+void Grid::deleteCellInSameLineOfBloc(Bloc &bloc)
 {
-	Cell *cells = bloc.getCells();
+	std::vector<Cell*> body = bloc.getCells();
 
-	for (int i = 3; i < 4; ++i)
+	for (int i = 0; i < body.size(); ++i)
 	{
-		//sf::Vector2i pos = cells[i].getPos();
-		sf::String color = cells[i].getColor();
+		sf::Vector2i pos = body[i]->getPos();
 
-		//if (checkLineCellY(pos.y, color))
-	//	{
-	//		destroyLine(pos.y);
-	//	}
+		if (checkLineCellY(pos.y, ""))
+		{
+			destroyLine(pos.y);
+		}
 	}
 }
 
 bool Grid::checkLineCellY(int cellY, std::string color)
 {
-	for (int i = 0; i < 9; i++) {
-		Cell cell = m_grid2D[i][cellY];
+	std::vector<Bloc>::iterator it;
 
-		if (cell.getColor() != color)
+	int numberBlocInLine = 0;
+
+	for (it = m_blocs.begin(); it != m_blocs.end(); ++it)
+	{
+		std::vector<Cell*> body = it->getCells();
+		std::vector<Cell*>::iterator it_cell;
+
+		for (it_cell = body.begin(); it_cell != body.end(); ++it_cell)
 		{
-			return false;
+			if ((*it_cell)->getPos().y == cellY)
+			{
+				numberBlocInLine++;
+			}
 		}
 	}
 
-	return true;
+	if (numberBlocInLine == 9)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 void Grid::destroyLine(int cellY)
 {
-	Cell cell = m_grid2D[0][cellY];
+	std::vector<int> deletedCellX;
+	std::vector<Bloc>::iterator it = m_blocs.begin();
 
-	cell.destroy();
-	/*for (int i = 0; i < 9; i++) {
-		
-	}*/
+	while(it != m_blocs.end())
+	{
+		deletedCellX.push_back(it->deleteCellInLine(cellY));
+		++it;
+	}
+
+	std::vector<Bloc>::iterator it_bloc = m_blocs.begin();
+
+	while (it_bloc != m_blocs.end())
+	{
+		std::vector<Cell*> body = it_bloc->getCells();
+		std::vector<Cell*>::iterator it_cell;
+
+		for (it_cell = body.begin(); it_cell != body.end(); ++it_cell)
+		{
+			for (int i = 0; i < deletedCellX.size(); ++i)
+			{
+				if ((*it_cell)->getPos().x == deletedCellX[i] && (*it_cell)->getPos().y < cellY)
+				{
+					(*it_cell)->increasePos(0, 1);
+					break;
+				}
+			}
+		}
+
+		it_bloc->setCells(body);
+
+		if (it_bloc->getCells().size() == 0)
+		{
+			m_blocs.erase(it_bloc);
+		}
+		else {
+			if (it_bloc != m_blocs.end()) {
+				++it_bloc;
+			}
+		}
+	}
+
+	for (int i = 0; i < 19; i++)
+	{
+		if (checkLineCellY(i, ""))
+		{
+			destroyLine(i);
+		}
+	}
 }

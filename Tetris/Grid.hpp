@@ -29,14 +29,14 @@ public:
 	bool CheckCollision(sf::Vector2i bodyCell);
 	bool CheckCollisionLeft(sf::Vector2i bodyCell);
 	bool CheckCollisionRight(sf::Vector2i bodyCell);
+	void updateGrid(Bloc* bloc);
 private:
-	void updateGrid(Bloc &bloc);
-	void checkLine(Bloc &bloc);
+	void deleteCellInSameLineOfBloc(Bloc &bloc);
 	bool checkLineCellY(int cellY, std::string color);
 	void destroyLine(int cellY);
 
-	Cell m_grid2D[9][19];
-	std::list<Bloc> m_blocs;
+	std::vector<Bloc> m_blocs;
+	Cell *m_grid[9][19] = { 0 };
 
 	sf::Vector2f m_offset;
 };

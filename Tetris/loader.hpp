@@ -15,12 +15,12 @@ class Loader
 
 		sf::Texture* GetBackground();
 		sf::Texture* GetBlocTexture(int index);
-		Cell* GetCell(int index);
+		std::vector<Cell*> GetCell(int index);
 
 	private:
 		sf::Texture background;
 		sf::Texture m_blocsTexture[5];
-		Cell m_cell[5][4];
+		std::vector<std::vector<Cell*>> m_cells;
 };
 
 #endif

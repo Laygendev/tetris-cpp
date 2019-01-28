@@ -9,10 +9,177 @@ Loader::Loader()
 	m_blocsTexture[3].loadFromFile("ressources/white.png");
 	m_blocsTexture[4].loadFromFile("ressources/yellow.png");
 
-	m_cell[0][0] = Cell(NULL, sf::Vector2i(0, 0), "yellow");
-	m_cell[0][1] = Cell(NULL, sf::Vector2i(0, 1), "yellow");
-	m_cell[0][2] = Cell(NULL, sf::Vector2i(0, 2), "yellow");
-	m_cell[0][3] = Cell(NULL, sf::Vector2i(0, 3), "yellow");
+	std::vector<Cell*> tmp;
+
+	std::vector<sf::Vector2i> posCell;
+	posCell.push_back(sf::Vector2i(0, 0));
+	posCell.push_back(sf::Vector2i(0, 0));
+
+	tmp.push_back(new Cell(NULL, posCell, "yellow"));
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(0, 1));
+	posCell.push_back(sf::Vector2i(1, 0));
+
+	tmp.push_back(new Cell(NULL, posCell, "yellow"));
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(0, 2));
+	posCell.push_back(sf::Vector2i(2, 0));
+
+	tmp.push_back(new Cell(NULL, posCell, "yellow"));
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(0, 3));
+	posCell.push_back(sf::Vector2i(3, 0));
+
+	tmp.push_back(new Cell(NULL, posCell, "yellow"));
+	posCell.erase(posCell.begin(), posCell.end());
+	
+	m_cells.push_back(tmp);
+
+	tmp.erase(tmp.begin(), tmp.end());
+
+	posCell.push_back(sf::Vector2i(0, 0));
+	posCell.push_back(sf::Vector2i(1, 0));
+	posCell.push_back(sf::Vector2i(0, 0));
+	posCell.push_back(sf::Vector2i(0, 0));
+
+	tmp.push_back(new Cell(NULL, posCell, "green"));
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(1, 0));
+	posCell.push_back(sf::Vector2i(1, 1));
+	posCell.push_back(sf::Vector2i(0, 1));
+	posCell.push_back(sf::Vector2i(1, 0));
+
+	tmp.push_back(new Cell(NULL, posCell, "green"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(2, 0));
+	posCell.push_back(sf::Vector2i(1, 2));
+	posCell.push_back(sf::Vector2i(1, 1));
+	posCell.push_back(sf::Vector2i(0, 1));
+
+	tmp.push_back(new Cell(NULL, posCell, "green"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(2, 1));
+	posCell.push_back(sf::Vector2i(0, 2));
+	posCell.push_back(sf::Vector2i(2, 1));
+	posCell.push_back(sf::Vector2i(0, 2));
+	tmp.push_back(new Cell(NULL, posCell, "green"));
+
+	m_cells.push_back(tmp);
+
+	tmp.erase(tmp.begin(), tmp.end());
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(0, 0));
+
+	tmp.push_back(new Cell(NULL, posCell, "blue"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(0, 1));
+
+	tmp.push_back(new Cell(NULL, posCell, "blue"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(1, 0));
+
+	tmp.push_back(new Cell(NULL, posCell, "blue"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(1, 1));
+
+	tmp.push_back(new Cell(NULL, posCell, "blue"));
+
+
+	m_cells.push_back(tmp);
+
+	tmp.erase(tmp.begin(), tmp.end());
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(0, 1));
+	posCell.push_back(sf::Vector2i(0, 0));
+
+	tmp.push_back(new Cell(NULL, posCell, "orange"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(1, 0));
+	posCell.push_back(sf::Vector2i(0, 1));
+
+
+	tmp.push_back(new Cell(NULL, posCell, "orange"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(1, 1));
+	posCell.push_back(sf::Vector2i(1, 1));
+
+
+	tmp.push_back(new Cell(NULL, posCell, "orange"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(2, 0));
+	posCell.push_back(sf::Vector2i(1, 2));
+
+
+	tmp.push_back(new Cell(NULL, posCell, "orange"));
+
+	m_cells.push_back(tmp);
+
+	tmp.erase(tmp.begin(), tmp.end());
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(0, 1));
+	posCell.push_back(sf::Vector2i(0, 0));
+	posCell.push_back(sf::Vector2i(0, 0));
+	posCell.push_back(sf::Vector2i(1, 0));
+
+
+	tmp.push_back(new Cell(NULL, posCell, "white"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(1, 0));
+	posCell.push_back(sf::Vector2i(0, 1));
+	posCell.push_back(sf::Vector2i(1, 0));
+	posCell.push_back(sf::Vector2i(1, 1));
+
+
+	tmp.push_back(new Cell(NULL, posCell, "white"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(1, 1));
+	posCell.push_back(sf::Vector2i(1, 1));
+	posCell.push_back(sf::Vector2i(1, 1));
+	posCell.push_back(sf::Vector2i(0, 1));
+
+	tmp.push_back(new Cell(NULL, posCell, "white"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(2, 1));
+	posCell.push_back(sf::Vector2i(0, 2));
+	posCell.push_back(sf::Vector2i(2, 0));
+	posCell.push_back(sf::Vector2i(1, 2));
+
+	tmp.push_back(new Cell(NULL, posCell, "white"));
+
+	m_cells.push_back(tmp);
+
 
 	/*m_body[1][0].x = 0;
 	m_body[1][0].y = 0;
@@ -43,7 +210,7 @@ sf::Texture* Loader::GetBlocTexture(int index)
 	return &m_blocsTexture[index];
 }
 
-Cell* Loader::GetCell(int index)
+std::vector<Cell*> Loader::GetCell(int index)
 {
-	return m_cell[index];
+	return m_cells[index];
 }
