@@ -31,9 +31,8 @@ public:
 	bool CheckCollisionRight(sf::Vector2i bodyCell);
 	void updateGrid(Bloc* bloc);
 private:
-	void deleteCellInSameLineOfBloc(Bloc &bloc);
-	bool checkLineCellY(int cellY, std::string color);
-	void destroyLine(int cellY);
+	std::vector<int> searchLineWithFullCell();
+	void destroyLine(std::vector<int> completedLine);
 
 	std::vector<Bloc> m_blocs;
 	Cell *m_grid[9][19] = { 0 };

@@ -94,5 +94,5 @@ void App::draw()
 void App::nextBloc()
 {
 	int random_bloc = rand() % 5;
-	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(random_bloc), m_loader.GetCell(random_bloc) );
+	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(random_bloc), m_loader.GetCell(random_bloc));
 }

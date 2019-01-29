@@ -3,7 +3,6 @@
 
 BlocMovable::BlocMovable(Grid* grid, sf::Texture *texture, std::vector <Cell*> cells) : Bloc(grid, texture, cells)
 {
-
 }
 
 BlocMovable::~BlocMovable()
@@ -86,7 +85,6 @@ void BlocMovable::translate(std::string direction)
 		for (int i = 0; i < m_cells.size(); ++i)
 		{
 			sf::Vector2i pos = m_cells[i]->simulateNextRotation();
-			std::cout << pos.x << std::endl;
 
 			if (pos.x < 0) {
 				outLeft = true;

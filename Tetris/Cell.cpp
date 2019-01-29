@@ -18,7 +18,6 @@ Cell::Cell(Cell const& cellToCopy)
 	m_sprite(cellToCopy.m_sprite),
 	m_currentRotation(cellToCopy.m_currentRotation)
 {
-	std::cout << "Copy cell" << std::endl;
 }
 
 
@@ -33,7 +32,6 @@ void Cell::update(Grid &grid) {
 
 void Cell::draw(sf::RenderWindow &window)
 {
-	std::cout << m_pos[m_currentRotation].y << std::endl;
 	window.draw(m_sprite);
 }
 
@@ -60,7 +58,7 @@ void Cell::SetTexture(sf::Texture *texture) {
 
 void Cell::destroy()
 {
-	m_bloc->deleteCellInLine(m_pos[m_currentRotation].y);
+	m_bloc->deleteCellInLine(m_pos[m_currentRotation].x, m_pos[m_currentRotation].y);
 }
 
 sf::Vector2i Cell::simulateNextRotation()

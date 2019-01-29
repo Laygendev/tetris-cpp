@@ -26,16 +26,22 @@ sf::Vector2f Grid::GetPositionByCell(int cellX, int cellY)
 
 void Grid::AddBloc(Grid* grid, Bloc *bloc)
 {
-	Bloc *newBloc = bloc;
+	Bloc *newBloc(bloc);
 	std::vector<Cell*> body = newBloc->getCells();
+	for (int i = 0; i < body.size(); ++i)
+	{
+		body[i]->setBloc(newBloc);
+	}
+
 	updateGrid(bloc);
 
-	int lineY = 0;
+	std::vector<int>lineCompleted(0);
 	
-	while (lineY = searchLineWithFullCell())
+	do
 	{
-		deleteCellInSameLine(lineY);
-	}
+		lineCompleted = searchLineWithFullCell();
+		destroyLine(lineCompleted);
+	} while (lineCompleted.size() != 0);
 }
 
 bool Grid::CheckCollision(sf::Vector2i bodyCell)
@@ -136,52 +142,49 @@ void Grid::updateGrid(Bloc* bloc)
 	}
 }
 
-void Grid::deleteCellInSameLineOfBloc(Bloc &bloc)
+std::vector<int> Grid::searchLineWithFullCell()
 {
-	std::vector<Cell*> body = bloc.getCells();
+	std::vector <int> lineCompleted;
 
-	for (int i = 0; i < body.size(); ++i)
+	int numberCellInLine = 0;
+	for (int i = 0; i < 19; ++i)
 	{
-		sf::Vector2i pos = body[i]->getPos();
+		numberCellInLine = 0;
 
-		if (checkLineCellY(pos.y, ""))
+		for (int j = 0; j < 9; j++)
 		{
-			destroyLine(pos.y);
-		}
-	}
-}
-
-bool Grid::checkLineCellY(int cellY, std::string color)
-{
-	std::vector<Bloc>::iterator it;
-
-	int numberBlocInLine = 0;
-
-	for (it = m_blocs.begin(); it != m_blocs.end(); ++it)
-	{
-		std::vector<Cell*> body = it->getCells();
-		std::vector<Cell*>::iterator it_cell;
-
-		for (it_cell = body.begin(); it_cell != body.end(); ++it_cell)
-		{
-			if ((*it_cell)->getPos().y == cellY)
+			if (m_grid[j][i] != NULL)
 			{
-				numberBlocInLine++;
+				numberCellInLine++;
 			}
 		}
+
+		if (numberCellInLine == 9)
+		{
+			lineCompleted.push_back(i);
+		}
 	}
 
-	if (numberBlocInLine == 9)
-	{
-		return true;
-	}
-
-	return false;
+	return lineCompleted;
 }
 
-void Grid::destroyLine(int cellY)
+void Grid::destroyLine(std::vector<int> completedLine)
 {
-	std::vector<int> deletedCellX;
+	for (int i = 0; i < completedLine.size(); ++i)
+	{
+		for (int j = 0; j < 9; ++j)
+		{
+			if (m_grid[j][completedLine[i]] != NULL)
+			{
+				m_grid[j][completedLine[i]]->destroy();
+				m_grid[j][completedLine[i]] = NULL;
+			}
+		}
+
+		completedLine.erase(completedLine.begin() + i);
+	}
+
+	/*std::vector<int> deletedCellX;
 	std::vector<Bloc>::iterator it = m_blocs.begin();
 
 	while(it != m_blocs.end())
@@ -228,5 +231,5 @@ void Grid::destroyLine(int cellY)
 		{
 			destroyLine(i);
 		}
-	}
+	}*/
 }

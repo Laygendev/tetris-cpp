@@ -20,12 +20,13 @@ class Bloc
 		void Update(sf::Clock &clock);
 		void updateTexture();
 		void updateCellPos();
-		int deleteCellInLine(int y);
+		int deleteCellInLine(int x, int y);
 
 		
 		void setCells(std::vector<Cell*> cells);
 		std::vector<Cell*> getCells();
 		sf::Texture *getTexture();
+		sf::Vector2i getPos();
 
 	protected:
 		Grid* m_grid;

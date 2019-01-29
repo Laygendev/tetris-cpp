@@ -20,13 +20,7 @@ Bloc::Bloc(Bloc const& blocToCopy)
 	m_cell_pos(blocToCopy.m_cell_pos),
 	m_cells(blocToCopy.m_cells)
 {
-	std::cout << "here" << m_cells.size() << std::endl;
-	/*for (int i = 0; i < m_cells.size(); ++i)
-	{
-		m_cells[i].setBloc(this);
-		m_cells[i].SetTexture(m_texture);
-		//m_cells[i].update(*m_grid);
-	}*/
+	std::cout << "copy" << std::endl;
 }
 
 Bloc::~Bloc()
@@ -66,13 +60,13 @@ void Bloc::updateCellPos()
 	}
 }
 
-int Bloc::deleteCellInLine(int y)
+int Bloc::deleteCellInLine(int x, int y)
 {
 	int posX = 0;
 	std::vector<Cell*>::iterator it_cell;
 
 	for (it_cell = m_cells.begin(); it_cell != m_cells.end(); ++it_cell) {
-		if ((*it_cell)->getPos().y == y) {
+		if ((*it_cell)->getPos().x == x && (*it_cell)->getPos().y == y) {
 			posX = (*it_cell)->getPos().x;
 			m_cells.erase(it_cell);
 			break;
@@ -95,3 +89,7 @@ std::vector<Cell*> Bloc::getCells() {
 	return m_cells;
 }
 
+sf::Vector2i Bloc::getPos()
+{
+	return m_cell_pos;
+}
