@@ -20,7 +20,6 @@ Bloc::Bloc(Bloc const& blocToCopy)
 	m_cell_pos(blocToCopy.m_cell_pos),
 	m_cells(blocToCopy.m_cells)
 {
-	std::cout << "copy" << std::endl;
 }
 
 Bloc::~Bloc()
@@ -39,7 +38,7 @@ void Bloc::Update(sf::Clock &clock)
 {
 	int i = 0;
 	for (i = 0; i < m_cells.size(); i++) {
-		m_cells[i]->update(*m_grid);
+		m_cells[i]->update(m_grid);
 
 	}
 }

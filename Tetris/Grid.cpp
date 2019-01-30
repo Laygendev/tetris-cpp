@@ -40,24 +40,33 @@ void Grid::AddBloc(Grid* grid, Bloc *bloc)
 	do
 	{
 		lineCompleted = searchLineWithFullCell();
-		destroyLine(lineCompleted);
+
+		if (lineCompleted.size() != 0) {
+			destroyLine(lineCompleted);
+		}
 	} while (lineCompleted.size() != 0);
+}
+
+bool Grid::checkHaveBloc(sf::Vector2i pos)
+{
+	if (pos.x > 9)
+	{
+		return true;
+	}
+
+	if (m_grid[pos.x][pos.y] != NULL)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 bool Grid::CheckCollision(sf::Vector2i bodyCell)
 {
-	std::vector<Bloc>::iterator it;
-
-	for (it = m_blocs.begin(); it != m_blocs.end(); ++it)
+	if (m_grid[bodyCell.x][bodyCell.y + 1] != NULL)
 	{
-		std::vector<Cell*> body = it->getCells();
-
-		for (int i = 0; i < body.size(); ++i)
-		{
-			if (body[i]->getPos().x == bodyCell.x && body[i]->getPos().y - bodyCell.y == 1) {
-				return true;
-			}
-		}
+		return true;
 	}
 
 	return false;
@@ -65,37 +74,20 @@ bool Grid::CheckCollision(sf::Vector2i bodyCell)
 
 bool Grid::CheckCollisionLeft(sf::Vector2i bodyCell)
 {
-	std::vector<Bloc>::iterator it;
-
-	for (it = m_blocs.begin(); it != m_blocs.end(); ++it)
+	if (m_grid[bodyCell.x - 1][bodyCell.y] != NULL)
 	{
-		std::vector<Cell*> body = it->getCells();
-
-		for (int i = 0; i < body.size(); ++i)
-		{
-			if (body[i]->getPos().x - bodyCell.x == -1 && body[i]->getPos().y == bodyCell.y ) {
-				return true;
-			}
-		}
+		return true;
 	}
 
 	return false;
+
 }
 
 bool Grid::CheckCollisionRight(sf::Vector2i bodyCell)
 {
-	std::vector<Bloc>::iterator it;
-
-	for (it = m_blocs.begin(); it != m_blocs.end(); ++it)
+	if (m_grid[bodyCell.x + 1][bodyCell.y] != NULL)
 	{
-		std::vector<Cell*> body = it->getCells();
-
-		for (int i = 0; i < body.size(); ++i)
-		{
-			if (body[i]->getPos().x - bodyCell.x == 1 && body[i]->getPos().y == bodyCell.y) {
-				return true;
-			}
-		}
+		return true;
 	}
 
 	return false;
@@ -170,66 +162,45 @@ std::vector<int> Grid::searchLineWithFullCell()
 
 void Grid::destroyLine(std::vector<int> completedLine)
 {
-	for (int i = 0; i < completedLine.size(); ++i)
+	int numberLineDeleted = completedLine.size();
+
+	std::vector<int>::iterator it = completedLine.begin();
+	int limitToDecrease = 19;
+
+	while (it != completedLine.end())
 	{
 		for (int j = 0; j < 9; ++j)
 		{
-			if (m_grid[j][completedLine[i]] != NULL)
+			if (m_grid[j][*it] != NULL)
 			{
-				m_grid[j][completedLine[i]]->destroy();
-				m_grid[j][completedLine[i]] = NULL;
+				m_grid[j][*it]->destroy();
+				m_grid[j][*it] = NULL;
+
 			}
 		}
 
-		completedLine.erase(completedLine.begin() + i);
-	}
-
-	/*std::vector<int> deletedCellX;
-	std::vector<Bloc>::iterator it = m_blocs.begin();
-
-	while(it != m_blocs.end())
-	{
-		deletedCellX.push_back(it->deleteCellInLine(cellY));
-		++it;
-	}
-
-	std::vector<Bloc>::iterator it_bloc = m_blocs.begin();
-
-	while (it_bloc != m_blocs.end())
-	{
-		std::vector<Cell*> body = it_bloc->getCells();
-		std::vector<Cell*>::iterator it_cell;
-
-		for (it_cell = body.begin(); it_cell != body.end(); ++it_cell)
+		if (*it < limitToDecrease)
 		{
-			for (int i = 0; i < deletedCellX.size(); ++i)
+			limitToDecrease = *it;
+		}
+
+		completedLine.erase(it);
+	}
+
+	for (int i = 8; i >= 0; --i)
+	{
+		for (int j = limitToDecrease; j >= 0; --j)
+		{
+			if (m_grid[i][j] != NULL)
 			{
-				if ((*it_cell)->getPos().x == deletedCellX[i] && (*it_cell)->getPos().y < cellY)
-				{
-					(*it_cell)->increasePos(0, 1);
-					break;
-				}
-			}
-		}
+				Cell *tmpCell = new Cell(*m_grid[i][j]);
+				m_grid[i][j] = NULL;
 
-		it_bloc->setCells(body);
-
-		if (it_bloc->getCells().size() == 0)
-		{
-			m_blocs.erase(it_bloc);
-		}
-		else {
-			if (it_bloc != m_blocs.end()) {
-				++it_bloc;
+				// Pas ceux qui sont déjà plus bas que les lignes supprimés
+				tmpCell->increasePos(0, numberLineDeleted);
+				tmpCell->update(this);
+				m_grid[i][j + numberLineDeleted] = tmpCell;
 			}
 		}
 	}
-
-	for (int i = 0; i < 19; i++)
-	{
-		if (checkLineCellY(i, ""))
-		{
-			destroyLine(i);
-		}
-	}*/
 }

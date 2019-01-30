@@ -80,6 +80,9 @@ void BlocMovable::translate(std::string direction)
 		int lastCellX = NULL;
 		bool outLeft = false;
 		bool outRight = false;
+		bool outBottom = false;
+
+		bool canRotate = false;
 
 		// Change cell direction
 		for (int i = 0; i < m_cells.size(); ++i)
@@ -93,9 +96,20 @@ void BlocMovable::translate(std::string direction)
 			if (pos.x + 1 > 9) {
 				outRight = true;
 			}
+
+			if (pos.y + 1 > 19) {
+				outBottom = true;
+			}
+
+			// Testes si y'a un bloc dans les nouvelles coordonnées ou si on sort dans l'écran en bas
+			if (m_grid->checkHaveBloc(pos))
+			{
+				canRotate = true;
+			}
+
 		}
 
-		if (!outLeft && !outRight)
+		if (!outLeft && !outRight && !outBottom && !canRotate)
 		{
 			for (int i = 0; i < m_cells.size(); ++i)
 			{
@@ -109,7 +123,7 @@ void BlocMovable::Update(sf::Clock &clock)
 {
 	sf::Time elapsed = clock.getElapsedTime();
 
-	if (elapsed.asSeconds() > 2.f && !m_hasCollision) {
+	if (elapsed.asSeconds() > 0.8f && !m_hasCollision) {
 		clock.restart();
 
 		if (CheckCollider()) {
@@ -127,7 +141,7 @@ void BlocMovable::Update(sf::Clock &clock)
 
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		m_cells[i]->update(*m_grid);
+		m_cells[i]->update(m_grid);
 	}
 
 }

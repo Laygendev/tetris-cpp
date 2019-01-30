@@ -26,8 +26,8 @@ void Cell::init(Grid &grid) {
 }
 
 
-void Cell::update(Grid &grid) {
-	m_sprite.setPosition(grid.GetPositionByCell(m_pos[m_currentRotation].x, m_pos[m_currentRotation].y));
+void Cell::update(Grid *grid) {
+	m_sprite.setPosition(grid->GetPositionByCell(m_pos[m_currentRotation].x, m_pos[m_currentRotation].y));
 }
 
 void Cell::draw(sf::RenderWindow &window)

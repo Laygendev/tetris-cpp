@@ -26,6 +26,7 @@ public:
 	void Draw(sf::RenderWindow& window);
 
 	void AddBloc(Grid *grid, Bloc *bloc);
+	bool checkHaveBloc(sf::Vector2i pos);
 	bool CheckCollision(sf::Vector2i bodyCell);
 	bool CheckCollisionLeft(sf::Vector2i bodyCell);
 	bool CheckCollisionRight(sf::Vector2i bodyCell);
@@ -35,7 +36,7 @@ private:
 	void destroyLine(std::vector<int> completedLine);
 
 	std::vector<Bloc> m_blocs;
-	Cell *m_grid[9][19] = { 0 };
+	Cell *m_grid[9][19] = { NULL };
 
 	sf::Vector2f m_offset;
 };
