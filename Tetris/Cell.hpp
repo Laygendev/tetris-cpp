@@ -13,7 +13,7 @@ class Cell
 {
 public:
 	Cell();
-	Cell(Bloc *bloc, std::vector<sf::Vector2i>, std::string color);
+	Cell(Bloc *bloc, const std::vector<sf::Vector2i>, std::string color);
 	Cell(Cell const& cellToCopy);
 	void init(Grid &grid);
 	void update(Grid &grid);

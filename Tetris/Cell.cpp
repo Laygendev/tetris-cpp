@@ -4,7 +4,7 @@
 
 Cell::Cell() {}
 
-Cell::Cell(Bloc *bloc, std::vector<sf::Vector2i> pos, std::string color)
+Cell::Cell(Bloc *bloc, const std::vector<sf::Vector2i> pos, std::string color)
 {
 	m_bloc = bloc;
 	m_pos = pos;

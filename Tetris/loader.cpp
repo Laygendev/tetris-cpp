@@ -212,5 +212,13 @@ sf::Texture* Loader::GetBlocTexture(int index)
 
 std::vector<Cell*> Loader::GetCell(int index)
 {
-	return m_cells[index];
+	std::vector<Cell*>tmp_vector_cell(0);
+
+	for (int i = 0; i < m_cells[index].size(); ++i)
+	{
+		Cell* tmp_cell = new Cell(*m_cells[index][i]);
+		tmp_vector_cell.push_back(tmp_cell);
+	}
+
+	return tmp_vector_cell;
 }

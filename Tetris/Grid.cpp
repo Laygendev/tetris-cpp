@@ -26,14 +26,14 @@ sf::Vector2f Grid::GetPositionByCell(int cellX, int cellY)
 
 void Grid::AddBloc(Grid* grid, Bloc *bloc)
 {
-	Bloc *newBloc(bloc);
+	Bloc *newBloc = new Bloc(*bloc);
 	std::vector<Cell*> body = newBloc->getCells();
 	for (int i = 0; i < body.size(); ++i)
 	{
 		body[i]->setBloc(newBloc);
 	}
 
-	updateGrid(bloc);
+	updateGrid(newBloc);
 
 	std::vector<int>lineCompleted(0);
 	
@@ -123,12 +123,12 @@ void Grid::Draw(sf::RenderWindow& window)
 		}
 	}
 
-	/*std::vector<Bloc>::iterator it;
+	std::vector<Bloc>::iterator it;
 
 	for (it = m_blocs.begin(); it != m_blocs.end(); ++it)
 	{
 		it->Display(window);
-	}*/
+	}
 }
 
 void Grid::updateGrid(Bloc* bloc)

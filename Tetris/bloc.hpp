@@ -14,6 +14,7 @@ class Bloc
 		
 		Bloc(Grid* grid, sf::Texture *texture, std::vector<Cell*> cells);
 		Bloc(Bloc const& blocToCopy);
+
 		~Bloc();
 
 		void Display(sf::RenderWindow &window);

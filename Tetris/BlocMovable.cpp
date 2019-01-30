@@ -1,7 +1,7 @@
 #include "BlocMovable.hpp"
 #include "Grid.hpp"
 
-BlocMovable::BlocMovable(Grid* grid, sf::Texture *texture, std::vector <Cell*> cells) : Bloc(grid, texture, cells)
+BlocMovable::BlocMovable(Grid* grid, sf::Texture *texture, const std::vector <Cell*> cells) : Bloc(grid, texture, cells)
 {
 }
 
