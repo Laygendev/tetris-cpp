@@ -40,6 +40,11 @@ void Cell::setPos(sf::Vector2i pos)
 	m_pos[m_currentRotation] = pos;
 }
 
+void Cell::setPosSprite(sf::Vector2f pos)
+{
+	m_sprite.setPosition(pos);
+}
+
 void Cell::increasePos(int x, int y)
 {
 	for (int i = 0; i < m_pos.size(); ++i)
@@ -101,4 +106,9 @@ sf::Vector2i Cell::getPos()
 std::string Cell::getColor()
 {
 	return m_color;
+}
+
+sf::Sprite* Cell::getSprite()
+{
+	return &m_sprite;
 }

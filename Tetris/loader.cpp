@@ -3,11 +3,19 @@
 Loader::Loader()
 {
 	background.loadFromFile("ressources/Mockup/background.jpg");
-	m_blocsTexture[0].loadFromFile("ressources/green.png");
-	m_blocsTexture[1].loadFromFile("ressources/marron.png");
-	m_blocsTexture[2].loadFromFile("ressources/orange.png");
-	m_blocsTexture[3].loadFromFile("ressources/white.png");
-	m_blocsTexture[4].loadFromFile("ressources/yellow.png");
+
+	m_blocsTexture[0].loadFromFile("ressources/yellow.png");
+	m_blocsTexture[1].loadFromFile("ressources/white.png");
+	m_blocsTexture[2].loadFromFile("ressources/marron.png");
+	m_blocsTexture[3].loadFromFile("ressources/orange.png");
+	m_blocsTexture[4].loadFromFile("ressources/green.png");
+
+
+	m_blocsSpriteTexture[0].loadFromFile("ressources/I/1.png");
+	m_blocsSpriteTexture[1].loadFromFile("ressources/L/L.png");
+	m_blocsSpriteTexture[2].loadFromFile("ressources/R/R.png");
+	m_blocsSpriteTexture[3].loadFromFile("ressources/S/S.png");
+	m_blocsSpriteTexture[4].loadFromFile("ressources/T/T_2.png");
 
 	std::vector<Cell*> tmp;
 
@@ -208,6 +216,11 @@ sf::Texture* Loader::GetBackground()
 sf::Texture* Loader::GetBlocTexture(int index)
 {
 	return &m_blocsTexture[index];
+}
+
+sf::Texture* Loader::GetBlocSpriteTexture(int index)
+{
+	return &m_blocsSpriteTexture[index];
 }
 
 std::vector<Cell*> Loader::GetCell(int index)

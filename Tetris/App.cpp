@@ -7,7 +7,7 @@ App::App()
 	m_grid           (),
 	m_clock          ()
 {
-	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(0), m_loader.GetCell(0));
+	nextBloc();
 }
 
 void App::run()
@@ -74,6 +74,24 @@ void App::resume()
 
 }
 
+void App::decreaseTime()
+{
+	if (m_number_bloc % 2 == 0)
+	{
+		m_time_bloc_movable -= 0.1f;
+
+		if (m_time_bloc_movable <= 0.2f)
+		{
+			m_time_bloc_movable = 0.2f;
+		}
+	}
+}
+
+float App::getTimeBlocMovable()
+{
+	return m_time_bloc_movable;
+}
+
 Grid App::GetGrid()
 {
 	return m_grid;
@@ -88,11 +106,35 @@ void App::draw()
 	{
 		m_bloc->Display(m_renderWindow);
 	}
+
+	if (m_next_bloc != NULL)
+	{
+		m_renderWindow.draw(*m_next_bloc);
+	}
+
 	m_renderWindow.display();
 }
 
 void App::nextBloc()
 {
-	int random_bloc = rand() % 5;
-	m_bloc = new BlocMovable(&m_grid, m_loader.GetBlocTexture(random_bloc), m_loader.GetCell(random_bloc));
+	m_number_bloc++;
+	decreaseTime();
+	
+	m_bloc = new BlocMovable(this, &m_grid, m_loader.GetBlocTexture(m_next_bloc_rand), m_loader.GetCell(m_next_bloc_rand));
+
+	m_next_bloc_rand = rand() % 5;
+	m_next_bloc = new sf::Sprite();
+	m_next_bloc->setTexture(*m_loader.GetBlocSpriteTexture(m_next_bloc_rand));
+	if (m_next_bloc->getTextureRect().height > 120)
+	{
+		m_next_bloc->setScale(0.6f, 0.6f);
+		m_next_bloc->setOrigin(sf::Vector2f(m_next_bloc->getTextureRect().width / 2, m_next_bloc->getTextureRect().height / 2));
+		m_next_bloc->setPosition(sf::Vector2f(505.f, 235.f));
+	}
+	else
+	{
+		m_next_bloc->setScale(0.8f, 0.8f);
+		m_next_bloc->setOrigin(sf::Vector2f(m_next_bloc->getTextureRect().width / 2, m_next_bloc->getTextureRect().height / 2));
+		m_next_bloc->setPosition(sf::Vector2f(505.f, 235.f));
+	}
 }

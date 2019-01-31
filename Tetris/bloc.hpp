@@ -6,13 +6,14 @@
 
 #include "Cell.hpp"
 
+class App;
 class Grid;
 
 class Bloc
 {
 	public:
 		
-		Bloc(Grid* grid, sf::Texture *texture, std::vector<Cell*> cells);
+		Bloc(App *app, Grid* grid, sf::Texture *texture, std::vector<Cell*> cells);
 		Bloc(Bloc const& blocToCopy);
 
 		~Bloc();
@@ -22,7 +23,6 @@ class Bloc
 		void updateTexture();
 		void updateCellPos();
 		int deleteCellInLine(int x, int y);
-
 		
 		void setCells(std::vector<Cell*> cells);
 		std::vector<Cell*> getCells();
@@ -30,6 +30,7 @@ class Bloc
 		sf::Vector2i getPos();
 
 	protected:
+		App* m_app;
 		Grid* m_grid;
 
 		sf::Texture *m_texture;

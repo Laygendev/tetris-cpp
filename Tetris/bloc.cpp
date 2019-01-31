@@ -1,8 +1,10 @@
 #include "Bloc.hpp"
 #include "Grid.hpp"
+#include "App.hpp"
 
-Bloc::Bloc(Grid* grid, sf::Texture *texture, std::vector<Cell*> cells)
+Bloc::Bloc(App* app, Grid* grid, sf::Texture *texture, std::vector<Cell*> cells)
 {
+	m_app = app;
 	m_grid = grid;
 	m_texture = texture;
 

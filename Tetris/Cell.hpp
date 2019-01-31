@@ -20,6 +20,7 @@ public:
 	void draw(sf::RenderWindow &window);
 
 	void setPos(sf::Vector2i pos);
+	void setPosSprite(sf::Vector2f pos);
 
 	void increasePos(int x, int y);
 
@@ -34,6 +35,7 @@ public:
 
 	sf::Vector2i getPos();
 	std::string getColor();
+	sf::Sprite* getSprite();
 private:
 	Bloc *m_bloc;
 	std::vector<sf::Vector2i> m_pos;
