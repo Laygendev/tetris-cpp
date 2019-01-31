@@ -2,9 +2,9 @@
 #include "Grid.hpp"
 #include "App.hpp"
 
-Bloc::Bloc(App* app, Grid* grid, sf::Texture *texture, std::vector<Cell*> cells)
+Bloc::Bloc(StateGame* stateGame, Grid* grid, sf::Texture *texture, std::vector<Cell*> cells)
 {
-	m_app = app;
+	m_stateGame = stateGame;
 	m_grid = grid;
 	m_texture = texture;
 
@@ -41,7 +41,6 @@ void Bloc::Update(sf::Clock &clock)
 	int i = 0;
 	for (i = 0; i < m_cells.size(); i++) {
 		m_cells[i]->update(m_grid);
-
 	}
 }
 

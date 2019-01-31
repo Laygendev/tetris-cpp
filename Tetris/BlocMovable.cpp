@@ -1,8 +1,8 @@
 #include "BlocMovable.hpp"
 #include "Grid.hpp"
-#include "App.hpp"
+#include "StateGame.hpp"
 
-BlocMovable::BlocMovable(App *app, Grid* grid, sf::Texture *texture, const std::vector <Cell*> cells) : Bloc(app, grid, texture, cells)
+BlocMovable::BlocMovable(StateGame *stateGame, Grid* grid, sf::Texture *texture, const std::vector <Cell*> cells) : Bloc(stateGame, grid, texture, cells)
 {
 }
 
@@ -123,7 +123,7 @@ void BlocMovable::translate(std::string direction)
 void BlocMovable::Update(sf::Clock &clock)
 {
 	sf::Time elapsed = clock.getElapsedTime();
-	if (elapsed.asSeconds() > m_app->getTimeBlocMovable() && !m_hasCollision) {
+	if (elapsed.asSeconds() > m_stateGame->getTimeBlocMovable() && !m_hasCollision) {
 		clock.restart();
 
 		if (CheckCollider()) {

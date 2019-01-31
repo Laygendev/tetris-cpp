@@ -134,6 +134,19 @@ void Grid::updateGrid(Bloc* bloc)
 	}
 }
 
+bool Grid::gridIsFullY()
+{
+	for (int i = 0; i < 9; ++i)
+	{
+		if (m_grid[i][0] != NULL)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 std::vector<int> Grid::searchLineWithFullCell()
 {
 	std::vector <int> lineCompleted;

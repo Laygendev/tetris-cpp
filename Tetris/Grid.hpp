@@ -31,6 +31,7 @@ public:
 	bool CheckCollisionLeft(sf::Vector2i bodyCell);
 	bool CheckCollisionRight(sf::Vector2i bodyCell);
 	void updateGrid(Bloc* bloc);
+	bool gridIsFullY();
 private:
 	std::vector<int> searchLineWithFullCell();
 	void destroyLine(std::vector<int> completedLine);

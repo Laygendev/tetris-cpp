@@ -6,14 +6,14 @@
 
 #include "Cell.hpp"
 
-class App;
+class StateGame;
 class Grid;
 
 class Bloc
 {
 	public:
 		
-		Bloc(App *app, Grid* grid, sf::Texture *texture, std::vector<Cell*> cells);
+		Bloc(StateGame *stateGame, Grid* grid, sf::Texture *texture, std::vector<Cell*> cells);
 		Bloc(Bloc const& blocToCopy);
 
 		~Bloc();
@@ -30,7 +30,7 @@ class Bloc
 		sf::Vector2i getPos();
 
 	protected:
-		App* m_app;
+		StateGame* m_stateGame;
 		Grid* m_grid;
 
 		sf::Texture *m_texture;
