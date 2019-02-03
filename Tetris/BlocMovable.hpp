@@ -13,7 +13,7 @@ public:
 	BlocMovable(StateGame * stateGame, Grid* grid, sf::Texture *texture, const std::vector<Cell*> cells);
 	~BlocMovable();
 
-	void translate(std::string direction);
+	void handleEvent(sf::Event event);
 	void Update(sf::Clock &clock);
 
 	bool CheckCollider();

@@ -39,5 +39,8 @@ class Bloc
 
 		int m_currentAngle = 0;
 
+		bool m_onSpeedEffect = false;
+		sf::RectangleShape m_effects[4];
+
 		std::vector<Cell*> m_cells;
 };

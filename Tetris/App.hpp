@@ -20,7 +20,7 @@ public:
 	void pause();
 	void resume();
 
-
+	void setCurrentState(int state);
 private:
 	sf::RenderWindow m_renderWindow;
 

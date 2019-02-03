@@ -32,6 +32,18 @@ void Bloc::Display(sf::RenderWindow &window)
 {
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
+		if (m_onSpeedEffect)
+		{
+			for (int x = 1; x < 88; x++)
+			{
+				m_effects[i].setPosition(m_cells[i]->getSprite()->getPosition().x, m_cells[i]->getSprite()->getPosition().y - (x * 2));
+				sf::Color tmpColor = m_effects[i].getFillColor();
+				tmpColor.a = (255 / x);
+				m_effects[i].setFillColor(tmpColor);
+				window.draw(m_effects[i]);
+			}
+		}
+
 		m_cells[i]->draw(window);
 	}
 }

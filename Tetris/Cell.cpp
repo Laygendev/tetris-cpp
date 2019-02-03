@@ -33,6 +33,12 @@ void Cell::update(Grid *grid) {
 void Cell::draw(sf::RenderWindow &window)
 {
 	window.draw(m_sprite);
+
+	if (m_onPlayFx)
+	{
+		updateFx();
+		drawFx(window);
+	}
 }
 
 void Cell::setPos(sf::Vector2i pos)
@@ -111,4 +117,36 @@ std::string Cell::getColor()
 sf::Sprite* Cell::getSprite()
 {
 	return &m_sprite;
+}
+
+sf::Texture* Cell::getTexture()
+{
+	return m_texture;
+}
+
+void Cell::updateFx()
+{
+	m_fx.setPosition(m_sprite.getPosition());
+	m_fx.setFillColor(sf::Color(255, 255, 255, 30));
+
+	float mSizeHeight = m_clockFX.getElapsedTime().asSeconds() * 420;
+
+	if (mSizeHeight > 44.f)
+	{
+		m_onPlayFx = false;
+		mSizeHeight = 44.f;
+	}
+
+	m_fx.setSize(sf::Vector2f(44.f, mSizeHeight));
+}
+
+void Cell::drawFx(sf::RenderWindow &window)
+{
+	window.draw(m_fx);
+}
+
+void Cell::playFx()
+{
+	m_onPlayFx = true;
+	m_clockFX.restart();
 }

@@ -20,8 +20,8 @@ class Loader
 
 	private:
 		sf::Texture background;
-		sf::Texture m_blocsTexture[5];
-		sf::Texture m_blocsSpriteTexture[5];
+		sf::Texture m_blocsTexture[6];
+		sf::Texture m_blocsSpriteTexture[6];
 		std::vector<std::vector<Cell*>> m_cells;
 };
 

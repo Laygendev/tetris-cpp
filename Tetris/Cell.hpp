@@ -36,6 +36,11 @@ public:
 	sf::Vector2i getPos();
 	std::string getColor();
 	sf::Sprite* getSprite();
+	sf::Texture* getTexture();
+
+	void playFx();
+	void updateFx();
+	void drawFx(sf::RenderWindow &window);
 private:
 	Bloc *m_bloc;
 	std::vector<sf::Vector2i> m_pos;
@@ -44,6 +49,11 @@ private:
 	sf::Sprite m_sprite;
 	sf::Texture *m_texture;
 	int m_currentRotation = 0;
+
+	bool m_onPlayFx = false;
+	sf::RectangleShape m_fx;
+
+	sf::Clock m_clockFX;
 };
 
 #endif

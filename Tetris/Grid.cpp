@@ -1,9 +1,16 @@
 #include "Grid.hpp"
+#include "StateGame.hpp"
 
-Grid::Grid()
+Grid::Grid(StateGame *stateGame)
+	: m_particles(100)
 {
+	m_stateGame = stateGame;
 	m_offset.x = 20.f;
 	m_offset.y = 96.f;
+
+	m_buffer.loadFromFile("ressources/sound/explosion.wav");
+	m_soundLineCompleted.setBuffer(m_buffer);
+
 }
 
 Grid::~Grid()
@@ -31,6 +38,7 @@ void Grid::AddBloc(Grid* grid, Bloc *bloc)
 	for (int i = 0; i < body.size(); ++i)
 	{
 		body[i]->setBloc(newBloc);
+		body[i]->playFx();
 	}
 
 	updateGrid(newBloc);
@@ -42,6 +50,7 @@ void Grid::AddBloc(Grid* grid, Bloc *bloc)
 		lineCompleted = searchLineWithFullCell();
 
 		if (lineCompleted.size() != 0) {
+			m_soundLineCompleted.play();
 			destroyLine(lineCompleted);
 		}
 	} while (lineCompleted.size() != 0);
@@ -121,6 +130,11 @@ void Grid::Draw(sf::RenderWindow& window)
 	{
 		it->Display(window);
 	}
+
+	if (m_playFx)
+	{
+		playFx(window);
+	}
 }
 
 void Grid::updateGrid(Bloc* bloc)
@@ -180,12 +194,16 @@ void Grid::destroyLine(std::vector<int> completedLine)
 	std::vector<int>::iterator it = completedLine.begin();
 	int limitToDecrease = 19;
 
+	m_completedLineForFx = completedLine;
+
+
 	while (it != completedLine.end())
 	{
 		for (int j = 0; j < 9; ++j)
 		{
 			if (m_grid[j][*it] != NULL)
 			{
+				m_completedLineTextureForFx.push_back(m_grid[j][*it]->getTexture());
 				m_grid[j][*it]->destroy();
 				m_grid[j][*it] = NULL;
 
@@ -216,4 +234,49 @@ void Grid::destroyLine(std::vector<int> completedLine)
 			}
 		}
 	}
+
+	m_stateGame->addScore((numberLineDeleted * 9) * 5);
+
+	m_playFx = true;
+	m_fxClock.restart();
+}
+
+void Grid::clearGrid()
+{
+	for (int i = 0; i < 9; ++i)
+	{
+		for (int j = 0; j < 19; ++j)
+		{
+			if (m_grid[i][j] != NULL)
+			{
+				m_grid[i][j] = NULL;
+			}
+		}
+	}
+}
+
+void Grid::playFx(sf::RenderWindow &window)
+{
+	int posY = m_completedLineForFx[0];
+
+	if (!m_particles.isPlaying())
+	{
+		for (int i = 0; i < 9; ++i)
+		{
+			m_particles.setEmitter(i, sf::Vector2f(m_offset.x + 44 * (i + 1), m_offset.y + (posY * 44)));
+			m_particles.setTexture(i, m_completedLineTextureForFx[i]);
+		}
+	}
+	else
+	{
+		sf::Time elapsed = m_fxClock.restart();
+		m_particles.update(elapsed);
+	}
+
+	if (!m_particles.isPlaying() && m_playFx)
+	{
+		m_playFx = false;
+	}
+	
+	window.draw(m_particles);
 }

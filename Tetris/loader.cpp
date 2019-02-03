@@ -9,6 +9,7 @@ Loader::Loader()
 	m_blocsTexture[2].loadFromFile("ressources/marron.png");
 	m_blocsTexture[3].loadFromFile("ressources/orange.png");
 	m_blocsTexture[4].loadFromFile("ressources/green.png");
+	m_blocsTexture[5].loadFromFile("ressources/rose.png");
 
 
 	m_blocsSpriteTexture[0].loadFromFile("ressources/I/1.png");
@@ -16,6 +17,7 @@ Loader::Loader()
 	m_blocsSpriteTexture[2].loadFromFile("ressources/R/R.png");
 	m_blocsSpriteTexture[3].loadFromFile("ressources/S/S.png");
 	m_blocsSpriteTexture[4].loadFromFile("ressources/T/T_2.png");
+	m_blocsSpriteTexture[5].loadFromFile("ressources/S/S_2.png");
 
 	std::vector<Cell*> tmp;
 
@@ -48,18 +50,27 @@ Loader::Loader()
 
 	tmp.erase(tmp.begin(), tmp.end());
 
+	posCell.push_back(sf::Vector2i(0, 1));
 	posCell.push_back(sf::Vector2i(0, 0));
-	posCell.push_back(sf::Vector2i(1, 0));
 	posCell.push_back(sf::Vector2i(0, 0));
 	posCell.push_back(sf::Vector2i(0, 0));
 
 	tmp.push_back(new Cell(NULL, posCell, "green"));
 	posCell.erase(posCell.begin(), posCell.end());
 
-	posCell.push_back(sf::Vector2i(1, 0));
 	posCell.push_back(sf::Vector2i(1, 1));
 	posCell.push_back(sf::Vector2i(0, 1));
+	posCell.push_back(sf::Vector2i(0, 1));
 	posCell.push_back(sf::Vector2i(1, 0));
+
+	tmp.push_back(new Cell(NULL, posCell, "green"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(2, 1));
+	posCell.push_back(sf::Vector2i(0, 2));
+	posCell.push_back(sf::Vector2i(1, 0));
+	posCell.push_back(sf::Vector2i(1, 1));
 
 	tmp.push_back(new Cell(NULL, posCell, "green"));
 
@@ -67,17 +78,8 @@ Loader::Loader()
 
 	posCell.push_back(sf::Vector2i(2, 0));
 	posCell.push_back(sf::Vector2i(1, 2));
-	posCell.push_back(sf::Vector2i(1, 1));
-	posCell.push_back(sf::Vector2i(0, 1));
-
-	tmp.push_back(new Cell(NULL, posCell, "green"));
-
-	posCell.erase(posCell.begin(), posCell.end());
-
-	posCell.push_back(sf::Vector2i(2, 1));
-	posCell.push_back(sf::Vector2i(0, 2));
-	posCell.push_back(sf::Vector2i(2, 1));
-	posCell.push_back(sf::Vector2i(0, 2));
+	posCell.push_back(sf::Vector2i(2, 0));
+	posCell.push_back(sf::Vector2i(1, 2));
 	tmp.push_back(new Cell(NULL, posCell, "green"));
 
 	m_cells.push_back(tmp);
@@ -88,25 +90,25 @@ Loader::Loader()
 
 	posCell.push_back(sf::Vector2i(0, 0));
 
-	tmp.push_back(new Cell(NULL, posCell, "blue"));
+	tmp.push_back(new Cell(NULL, posCell, "marron"));
 
 	posCell.erase(posCell.begin(), posCell.end());
 
 	posCell.push_back(sf::Vector2i(0, 1));
 
-	tmp.push_back(new Cell(NULL, posCell, "blue"));
+	tmp.push_back(new Cell(NULL, posCell, "marron"));
 
 	posCell.erase(posCell.begin(), posCell.end());
 
 	posCell.push_back(sf::Vector2i(1, 0));
 
-	tmp.push_back(new Cell(NULL, posCell, "blue"));
+	tmp.push_back(new Cell(NULL, posCell, "marron"));
 
 	posCell.erase(posCell.begin(), posCell.end());
 
 	posCell.push_back(sf::Vector2i(1, 1));
 
-	tmp.push_back(new Cell(NULL, posCell, "blue"));
+	tmp.push_back(new Cell(NULL, posCell, "marron"));
 
 
 	m_cells.push_back(tmp);
@@ -188,24 +190,37 @@ Loader::Loader()
 
 	m_cells.push_back(tmp);
 
+	tmp.erase(tmp.begin(), tmp.end());
 
-	/*m_body[1][0].x = 0;
-	m_body[1][0].y = 0;
-	m_body[1][1].x = 0;
-	m_body[1][1].y = 1;
-	m_body[1][2].x = 0;
-	m_body[1][2].y = 2;
-	m_body[1][3].x = 1;
-	m_body[1][3].y = 2;
+	posCell.erase(posCell.begin(), posCell.end());
 
-	m_body[2][0].x = 0;
-	m_body[2][0].y = 0;
-	m_body[2][1].x = 0;
-	m_body[2][1].y = 1;
-	m_body[2][2].x = 1;
-	m_body[2][2].y = 0;
-	m_body[2][3].x = 1;
-	m_body[2][3].y = 1;*/
+	posCell.push_back(sf::Vector2i(0, 0));
+	posCell.push_back(sf::Vector2i(1, 0));
+
+	tmp.push_back(new Cell(NULL, posCell, "rose"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(1, 0));
+	posCell.push_back(sf::Vector2i(1, 1));
+
+	tmp.push_back(new Cell(NULL, posCell, "rose"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(1, 1));
+	posCell.push_back(sf::Vector2i(0, 1));
+
+	tmp.push_back(new Cell(NULL, posCell, "rose"));
+
+	posCell.erase(posCell.begin(), posCell.end());
+
+	posCell.push_back(sf::Vector2i(2, 1));
+	posCell.push_back(sf::Vector2i(0, 2));
+
+	tmp.push_back(new Cell(NULL, posCell, "rose"));
+
+	m_cells.push_back(tmp);
 }
 
 sf::Texture* Loader::GetBackground()
